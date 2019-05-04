@@ -1,0 +1,381 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\geometry{left=0.9cm, right=0.9cm, top=2.0cm, bottom=2.0cm}
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage[colorlinks, linkcolor=black, anchorcolor=black, citecolor=black]{hyperref}
+
+\renewcommand\.{.\hspace{3pt}}
+\renewcommand\,{,\hspace{4pt}}
+\renewcommand\:{:\hspace{3pt}}
+\newcommand\A{,\hspace{6pt}}
+
+\title{关于代数数域的代数封闭性的探究}
+\author{Michael W}
+\date{2018年10月23日 --- 2018年12月8日}
+
+\begin{document}
+	
+	\maketitle
+	
+	更新于2018年12月15日\. ~\\
+	
+	\textbf{摘要} \quad 本文通过一个较为初等的方式\, 证明了代数数域 $\mathbb{A}$ 是代数闭域\.
+	
+	\textbf{说明} \quad 本文基于代数基本定理\, 即\: 复数域 $\mathbb{C}$ 是代数闭域\, 对于任意的 $n \in \mathbb{N^{\ast}}$ \, 任何复系数一元 $n$ 次多项式方程在复数域 $\mathbb{C}$ 上有且只有 $n$ 个根\.
+	
+	\section{命题}
+	对于一个在复数域 $\mathbb{C}$ 上的 $X$ \, 若存在一个 $n$ 次整系数多项式方程
+	\begin{equation}
+		f(x) = a_{n} x^{n} + a_{n-1} x^{n-1} + \cdots + a_{1} x + a_{0} = 0 \quad \left( n \in \mathbb{N^{\ast}} \A a_{0} , a_{1} , \ldots , a_{n} \in \mathbb{Z} \A a_{n} \neq 0 \A x \in \mathbb{C} \right) \.
+	\end{equation}
+	满足 $f \left( X \right) = 0$ \, 则称 $X$ 是一个代数数\.
+	
+	若存在一个 $n$ 次整系数方程 $f(x) = 0$ 使得 $X$ 是它的一个根\, 而不存在次数低于 $n$ 的整系数方程 $g(x) = 0$ 使得 $X$ 是它的一个根\, 则称 $X$ 是 $n$ 次代数数\.
+	
+	现将所有代数数构成的集合记作 $\mathbb{A}$ \. 该集合是复数域 $\mathbb{C}$ 的一个子集\.
+	
+	\textbf{命题} \quad $\forall \ n \in \mathbb{N^{\ast}} \A a_{0} , a_{1} , \ldots , a_{n} \in \mathbb{A}$ (其中 $a_{n} \neq 0$) \, 对于代数数系数方程
+	\begin{equation}
+		f(x) = a_{n} x^{n} + a_{n-1} x^{n-1} + \cdots + a_{1} x + a_{0} = 0 \,
+	\end{equation}
+	若 $\mathbb{C}$ 上的 $X$ 满足 $f(X) = 0$ \, 则 $X$ 仍为代数数\.
+	
+	\section{预备定义}
+	\subsection{运算推广}
+	为了下文的需要\, 对一些运算进行推广\:
+	\begin{align*}
+		& 0! = 1 ; \\
+		& 0^{0} = 1 ; \\
+		& C_{n}^{m} = \begin{cases}
+		\frac{n!}{m! \left( n-m \right) !} & \left( m , n \in \mathbb{N^{\ast}} \A m < n \right) \\
+		1 & \left( n \in \mathbb{N} \A m \left( m-n \right) = 0  \right) \\
+		0 & \left( m , n \in \mathbb{N} \A m > n \right)
+		\end{cases} \.
+	\end{align*}
+	
+	\subsection{数列}
+	
+	为了简便\, 我们先定义以下记号\:
+	\begin{align*}
+		\mathbb{Z} |_{\delta}^{\varepsilon} & = \left\{ \delta , \delta+1 , \ldots , \varepsilon \right\} \quad \left( \delta , \varepsilon \in \mathbb{Z} \A \delta \leq \varepsilon \right) ; \\
+		\Xi |_{\delta}^{\varepsilon} & \Longleftrightarrow \Xi_{\delta} , \Xi_{\delta+1} , \ldots , \Xi_{\varepsilon} \quad \left( \delta , \varepsilon \in \mathbb{Z} \A \delta \leq \varepsilon \right) \,
+	\end{align*}
+	其中 $\Xi$ 为变量名\. 例如\, $$\alpha |_{1}^{\varphi} \quad \left( \varphi \in \mathbb{N^{\ast}} \right)$$ 对应着一个简单的数列 $$\alpha_{1} , \alpha_{2} , \ldots , \alpha_{\varphi} \.$$
+	
+	变量名中变量数量可以不唯一\, 在 $\beta |_{1}^{\eta} , \lambda |_{1}^{\eta} \quad \left( \eta \in \mathbb{N^{\ast}} \right)$ 都有定义的情况下\, $\beta^{\left( \lambda \right)} |_{1}^{\eta}$ 表示 $$\beta_{1}^{\left( \lambda_{1} \right)} , \beta_{2}^{\left( \lambda_{2} \right)} , \ldots , \beta_{\eta}^{\left( \lambda_{\eta} \right)} \.$$
+	
+	将数列 $\alpha_{1} , \alpha_{2} , \ldots , \alpha_{\varphi} \quad \left( \varphi \in \mathbb{N^{\ast}} \A \alpha |_{1}^{\varphi} \in \mathbb{Z} \right) $ 进行由小到大的排列\:
+	\begin{equation} \label{eqn:1}
+		\begin{split}
+		& \left( \alpha_{1} , \alpha_{2} , \ldots , \alpha_{\varphi} \right) \longrightarrow \big( \underbrace{\beta_{1} , \beta_{1} , \ldots , \beta_{1}}_{\lambda_{1}} , \underbrace{\beta_{2} , \beta_{2} , \ldots , \beta_{2}}_{\lambda_{2}} , \ldots , \underbrace{\beta_{\eta} , \beta_{\eta} , \ldots , \beta_{\eta}}_{\lambda_{\eta}} \big) \\
+		& \left( \eta \in \mathbb{N^{\ast}} \A \lambda |_{1}^{\eta} \in \mathbb{N^{\ast}} \A \sum_{i=1}^{\eta} \lambda_{i} = \varphi \A \beta_{i} < \beta_{i+1} \left( i \in \mathbb{Z} |_{1}^{\eta-1} \right) \right) \.
+		\end{split}
+	\end{equation}
+	
+	我们用 $\left( \alpha |_{1}^{\varphi} \right)$ 表示有序数列\, 用 $\left( \alpha |_{1}^{\varphi} \right)^{\ast}$ 表示无序数列\. 于是我们有
+	\begin{align*}
+		\left( \alpha |_{1}^{\varphi} \right) = \left( \bar{\alpha} |_{1}^{\bar{\varphi}} \right) & \Leftrightarrow \varphi = \bar{\varphi} \A \alpha_{i} = \bar{\alpha_{i}} \quad \left( i \in \mathbb{Z} |_{1}^{\varphi} \right) ;\\
+		\left( \alpha |_{1}^{\varphi} \right)^{\ast} = \left( \bar{\alpha} |_{1}^{\bar{\varphi}} \right)^{\ast} & \Leftrightarrow \varphi = \bar{\varphi} \A \eta = \bar{\eta} \A \beta_{i} = \bar{\beta}_{i} \A \lambda_{i} = \bar{\lambda}_{i} \quad \left( i \in \mathbb{Z} |_{1}^{\eta} \right) \.
+	\end{align*}
+	
+	\subsection{一些有序数列集合}
+	对一些有序数列的集合定义如下\:
+	\begin{align*}
+		& \bm{\Psi}_{\varphi} = \left\{ \left( \xi |_{1}^{\varphi} \right) \ \left| \  \left( \xi |_{1}^{\varphi} \right)^{\ast} = \left( 1 , 2 , \ldots , \varphi \right)^{\ast} \right. \right\} \quad \left( \varphi \in \mathbb{N}^{\ast} \right) ; \\
+		& \bm{\Psi} \left[ \alpha |_{1}^{\varphi} \right] = \left\{ \left( \xi |_{1}^{\varphi} \right) \ \left| \  \left( \xi |_{1}^{\varphi} \right)^{\ast} = \left( \alpha |_{1}^{\varphi} \right)^{\ast} \right. \right\} \quad \left( \varphi \in \mathbb{N^{\ast}} \A \alpha |_{1}^{\varphi} \in \mathbb{Z} \right) ; \\
+		& \bm{\Psi^{\ast}} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right] = \bm{\Psi} \left[ \alpha |_{1}^{\varphi} \right] \quad \text{($\eta , \beta |_{1}^{\eta} , \lambda |_{1}^{\eta}$ 的值参照式 \eqref{eqn:1})} ; \\
+		& \bm{\vec{\Psi}}_{\delta}^{\varepsilon} \left[ \kappa \right] = \left\{ \left( \xi |_{1}^{\kappa} \right) \ \left| \  \xi |_{1}^{\kappa} \in \mathbb{Z} \A \delta \leq \xi_{1} < \xi_{2} < \cdots < \xi_{\kappa} \leq \varepsilon \right. \right\} \quad \left( \delta , \varepsilon \in \mathbb{Z} \A \kappa \in \mathbb{N^{\ast}} \A \varepsilon - \delta \geq \kappa - 1 \right) ; \\
+		& \bm{\hat{\Psi}}_{\sigma} \left[ \kappa \right] = \left\{ \left( \xi |_{1}^{\kappa} \right) \ \left| \  \xi |_{1}^{\kappa} \in \mathbb{N} \A \sum_{i=1}^{\kappa} \xi_{i} = \sigma \right. \right\} \quad \left( \kappa \in \mathbb{N^{\ast}} \A \sigma \in \mathbb{N} \right) ; \\
+		& \bm{\hat{\Psi}}_{\sigma}^{\bm{\ast}} \left[ \kappa \right] = \left\{ \left( \xi |_{1}^{\kappa} \right) \ \left| \  \xi |_{1}^{\kappa} \in \mathbb{N^{\ast}} \A \sum_{i=1}^{\kappa} \xi_{i} = \sigma \right. \right\} \quad \left( \kappa , \sigma \in \mathbb{N^{\ast}} \A \kappa \leq \sigma \right) \.
+	\end{align*}
+	
+	另外\, 为了下文的需要\, 对 $\bm{\Psi^{\ast}} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right]$ 的定义进行推广\.
+	
+	若 $\exists \ \lambda_{i} = 0 \quad \left( i \in \mathbb{Z}_{1}^{\eta} \right)$ \, 则 $$\bm{\Psi^{\ast}} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right] = \bm{\Psi^{\ast}} \left[ \beta_{1}^{\left( \lambda_{1} \right)} , \beta_{2}^{\left( \lambda_{2} \right)} , \ldots , \beta_{i-1}^{\left( \lambda_{i-1} \right)} , \beta_{i+1}^{\left( \lambda_{i+1} \right)} , \ldots , \beta_{\eta}^{\left( \lambda_{\eta} \right)} \right] \. $$
+	
+	\subsection{齐次轮换式}
+	对关于参数 $x |_{1}^{\varphi} \quad \left( \varphi \in \mathbb{N^{\ast}} \A x |_{1}^{\varphi} \in \mathbb{C} \right)$ 的 $\varphi$ 元齐次轮换式定义如下\:
+	\begin{align*}
+		& \bm{\omega} \left[ \alpha |_{1}^{\varphi} \right] = \sum_{\left( \delta |_{1}^{\varphi} \right) \in \bm{\Psi}_{\varphi}} \left( \prod_{i=1}^{\varphi} x_{i}^{\alpha_{\delta_{i}}} \right) \quad \left( \varphi \in \mathbb{N^{\ast}} \A \alpha |_{1}^{\varphi} \in \mathbb{N} \right) ; \\
+		& \bm{\omega^{\ast}} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right] = \bm{\omega} \left[ \alpha |_{1}^{\varphi} \right] \quad \text{($\eta , \beta |_{1}^{\eta} , \lambda |_{1}^{\eta}$ 的值参照式 \eqref{eqn:1})} ; \\
+		& \bm{\Omega} \left[ \alpha |_{1}^{\varphi} \right] = \sum_{\left( \varepsilon |_{1}^{\varphi} \right) \in \bm{\Psi} \left[ \alpha |_{1}^{\varphi} \right]} \left( \prod_{i=1}^{\varphi} x_{i}^{\varepsilon_{i}} \right) \quad \left( \varphi \in \mathbb{N^{\ast}} \A \alpha |_{1}^{\varphi} \in \mathbb{N} \right) ; \\
+		& \bm{\Omega^{\ast}} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right] = \bm{\Omega} \left[ \alpha |_{1}^{\varphi} \right] = \sum_{\left( \varepsilon |_{1}^{\varphi} \right) \in \bm{\Psi^{\ast}} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right]} \left( \prod_{i=1}^{\varphi} x_{i}^{\varepsilon_{i}} \right) \quad \text{($\eta , \beta |_{1}^{\eta} , \lambda |_{1}^{\eta}$ 的值参照式 \eqref{eqn:1})} \.
+	\end{align*}
+	
+	由定义可得
+	\begin{equation} \label{eqn:2}
+		\bm{\omega^{\ast}} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right] = \prod_{i=1}^{\eta} \left( \lambda_{i} ! \right) \cdot \bm{\Omega^{\ast}} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right] \.
+	\end{equation}
+	由式 \eqref{eqn:2} 可知\, $\bm{\omega}^{\ast} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right]$ 与 $\bm{\Omega}^{\ast} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right]$ 可以通过乘以一个有理数来得到对方的数值\.
+	
+	另外\, 为了下文的需要\, 对 $\bm{\omega^{\ast}} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right]$ 和 $\bm{\Omega^{\ast}} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right]$ 的定义进行推广\.
+	
+	若 $\exists \ \lambda_{i} = 0 \quad \left( i \in \mathbb{Z}_{1}^{\eta} \right)$ \, 则
+	\begin{align*}
+		& \bm{\omega^{\ast}} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right] = \bm{\omega^{\ast}} \left[ \beta_{1}^{\left( \lambda_{1} \right)} , \beta_{2}^{\left( \lambda_{2} \right)} , \ldots , \beta_{i-1}^{\left( \lambda_{i-1} \right)} , \beta_{i+1}^{\left( \lambda_{i+1} \right)} , \ldots , \beta_{\eta}^{\left( \lambda_{\eta} \right)} \right] ; \\
+		& \bm{\Omega^{\ast}} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right] = \bm{\Omega^{\ast}} \left[ \beta_{1}^{\left( \lambda_{1} \right)} , \beta_{2}^{\left( \lambda_{2} \right)} , \ldots , \beta_{i-1}^{\left( \lambda_{i-1} \right)} , \beta_{i+1}^{\left( \lambda_{i+1} \right)} , \ldots , \beta_{\eta}^{\left( \lambda_{\eta} \right)} \right] \.
+	\end{align*}
+	若 $\exists \ \lambda_{i} \in \mathbb{Z}^{-} \quad \left( i \in \mathbb{Z}_{1}^{\eta} \right)$ \, 则
+	\begin{equation*}
+		\bm{\omega^{\ast}} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right] = \bm{\Omega^{\ast}} \left[ \beta^{\left( \lambda \right)} |_{1}^{\eta} \right] = 0 \.
+	\end{equation*}
+	
+	\subsection{多项式函数与多项式方程}
+	本文中讨论的多项式函数定义域都为复数域 $\mathbb{C}$ \. 形如
+	\begin{equation}
+		f(x) = a_{n} x^{n} + a_{n-1} x^{n-1} + \cdots + a_{1} x + a_{0} = \sum_{i=0}^{n} \left( a_{i} x^{i} \right) \quad \left( n \in \mathbb{N^{\ast}} \A a |_{0}^{n} \in \mathbb{C} \A a_{n} \neq 0 \A x \in \mathbb{C} \right)
+	\end{equation}
+	的函数 $f(x)$ 称为 $n$ 次多项式函数\.
+	
+	$n$ 次多项式方程即
+	\begin{equation}
+		f(x) = a_{n} x^{n} + a_{n-1} x^{n-1} + \cdots + a_{1} x + a_{0} = \sum_{i=0}^{n} \left( a_{i} x^{i} \right) = 0 \quad \left( n \in \mathbb{N^{\ast}} \A a |_{0}^{n} \in \mathbb{C} \A a_{n} \neq 0 \A x \in \mathbb{C} \right) \.
+	\end{equation}
+
+	\subsection{有理表示}
+	若关于 $\gamma |_{1}^{\varphi} \quad \left( \varphi \in \mathbb{N^{\ast}} \A \gamma |_{1}^{\varphi} \in \mathbb{C} \right)$ 的表达式 $\Gamma$ 经过展开后可以得到
+	\begin{equation}
+		\Gamma = \sum_{i=1}^{\nu} \left( \mu^{(i)} \cdot \prod_{j=1}^{\varphi} \gamma_{j}^{\alpha_{j}^{(i)}} \right) \quad \left( \nu \in \mathbb{N} \A \mu_{i} \in \mathbb{Q} \A \alpha^{(i)} |_{1}^{\varphi} \in \mathbb{N} \quad \left( i \in \mathbb{Z} |_{1}^{\nu} \right) \right)
+	\end{equation}
+	(其中 $\nu , \mu^{(i)} \quad \left( i \in \mathbb{Z} |_{1}^{\nu} \right)$ 为常数) \, 则称 $\Gamma$ 为关于 $\gamma |_{1}^{\varphi}$ 的有理运算\, 或称 $\Gamma$ 可由 $\gamma |_{1}^{\varphi}$ 有理表示\.
+	
+	\section{引理}
+	\subsection{命题1} \label{sec:3.1}
+	若 $\Gamma$ 为关于 $\gamma |_{0}^{\varphi}$ 的有理运算\, 且 $\gamma_{0}$ 为关于 $\bar{\gamma} |_{1}^{\bar{\varphi}}$ 的有理运算\, 则 $\Gamma$ 为关于 $\gamma |_{1}^{\varphi} , \bar{\gamma} |_{1}^{\bar{\varphi}}$ 的有理运算\.
+	
+	\textbf{证明} \quad 由定义\, 令
+	\begin{align*}
+		\Gamma & = \sum_{i=1}^{\nu} \left( \mu^{(i)} \cdot \prod_{j=0}^{\varphi} \gamma_{j}^{\alpha_{j}^{(i)}} \right) \quad \left( \nu \in \mathbb{N} \A \mu_{i} \in \mathbb{Q} \A \alpha^{(i)} |_{0}^{\varphi} \in \mathbb{N} \quad \left( i \in \mathbb{Z} |_{1}^{\nu} \right) \right) \, \\
+		\gamma_{0} & = \sum_{i=1}^{\bar{\nu}} \left( \bar{\mu}^{(i)} \cdot \prod_{j=1}^{\bar{\varphi}} \bar{\gamma}_{j}^{\bar{\alpha}_{j}^{(i)}} \right) \quad \left( \bar{\nu} \in \mathbb{N} \A \bar{\mu}_{i} \in \mathbb{Q} \A \bar{\alpha}^{(i)} |_{1}^{\bar{\varphi}} \in \mathbb{N} \quad \left( i \in \mathbb{Z} |_{1}^{\bar{\nu}} \right) \right) \,
+	\end{align*}
+	于是可得
+	\begin{align} \label{eqn:3}
+		\Gamma & = \sum_{i=1}^{\nu} \left( \mu^{(i)} \cdot \gamma_{0}^{\alpha_{0}^{(i)}} \cdot \prod_{j=1}^{\varphi} \gamma_{j}^{\alpha_{j}^{(i)}} \right) \notag \\
+		& = \sum_{i=1}^{\nu} \left( \mu^{(i)} \cdot \left( \sum_{k=1}^{\bar{\nu}} \left( \bar{\mu}^{(k)} \cdot \prod_{l=1}^{\bar{\varphi}} \bar{\gamma}_{l}^{\bar{\alpha}_{l}^{(k)}} \right) \right)^{\alpha_{0}^{(i)}} \cdot \prod_{j=1}^{\varphi} \gamma_{j}^{\alpha_{j}^{(i)}} \right) \notag \\
+		& = \sum_{i=1}^{\nu} \left( \mu^{(i)} \cdot \left( \sum_{t=1}^{\alpha_{0}^{(i)}} \sum_{\left( q |_{1}^{t} \right) \in \bm{\hat{\Psi}}_{\alpha_{0}^{(i)}}^{\bm{\ast}} \left[ t \right]} \sum_{\left( p |_{1}^{t} \right) \in \bm{\vec{\Psi}}_{1}^{\bar{\nu}} \left[ t \right]} \left( \left( \alpha_{0}^{(i)} \right)! \cdot \left( \prod_{h=1}^{t} q_{h}! \right)^{-1} \cdot \prod_{r=1}^{t} \left( \bar{\mu}^{(p_{r})} \cdot \prod_{l=1}^{\bar{\varphi}} \bar{\gamma}_{l}^{\bar{\alpha}_{l}^{(p_{r})}} \right)^{q_{r}} \right) \right) \cdot \prod_{j=1}^{\varphi} \gamma_{j}^{\alpha_{j}^{(i)}} \right) \.
+	\end{align}
+	
+	由式 \eqref{eqn:3} 即得到了用 $\gamma |_{1}^{\varphi} , \bar{\gamma} |_{1}^{\bar{\varphi}}$ 有理表示 $\Gamma$ 的方式\. 证毕\.
+	
+	\subsection{推论1} \label{sec:3.2}
+	若 $\Gamma$ 为关于 $\gamma |_{1}^{\varphi}$ 的有理运算\, 且 $\gamma |_{1}^{\varphi}$ 中每一个数都为关于 $\bar{\gamma} |_{1}^{\bar{\varphi}}$ 的有理运算\, 则 $\Gamma$ 为关于 $\bar{\gamma} |_{1}^{\bar{\varphi}}$ 的有理运算\.
+	
+	该推论可由 \underline{\nameref{sec:3.1}}推得\.
+	
+	\subsection{命题2} \label{sec:3.3}
+	考察下列 $n$ 次多项式方程
+	\begin{equation}
+		f(x) = \sum_{i=0}^{n} \left( a_{i} x^{i} \right) = 0 \.
+	\end{equation}
+	
+	设这个方程的 $n$ 个根为 $x |_{1}^{n}$ \, 将 $x$ 视作参数\, 则
+	\begin{align*}
+		a_{n} \cdot \prod_{k=1}^{n} \left( x - x_{k} \right) & = \sum_{j=0}^{n} \left( a_{j} x^{j} \right) \\
+		a_{n} \cdot \left( x^{n} + \sum_{j=1}^{n} \left( x^{n-j} \cdot \left( -1 \right)^{j} \cdot \sum_{\left( i |_{1}^{j} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ j \right]} \left( \prod_{k=1}^{j} x_{i_{k}} \right) \right) \right) & = a_{n} x^{n} + \sum_{j=1}^{n} \left( a_{n-j} x^{n-j} \right) \\
+		\sum_{j=1}^{n} \left( x^{n-j} \cdot \left( \left( -1 \right)^{j} \cdot a_{n} \cdot \sum_{\left( i |_{1}^{j} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ j \right]} \left( \prod_{k=1}^{j} x_{i_{k}} \right) - a_{n-j} \right) \right) & = 0 \.
+	\end{align*}
+	
+	于是得到下列根与系数的关系 (Vieta定理) \:
+	\begin{equation*}
+		\sum_{\left( i |_{1}^{m} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ m \right]} \left( \prod_{k=1}^{m} x_{i_{k}} \right) = \bm{\Omega^{\ast}} \left[ 0^{\left( n-m \right)} , 1^{\left( m \right)} \right] = (-1)^{m} \cdot \frac{a_{n-m}}{a_{n}} \quad \left( m \in \mathbb{Z} |_{1}^{n} \right) \,
+	\end{equation*}
+	即
+	\begin{equation}
+		\left\{
+		\begin{aligned}
+		\sum_{\left( i |_{1}^{1} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ 1 \right]} \left( \prod_{k=1}^{1} x_{i_{k}} \right) & = \bm{\Omega^{\ast}} \left[ 0^{\left( n-1 \right)} , 1^{\left( 1 \right)} \right] = - \frac{a_{n-1}}{a_{n}} \\
+		\sum_{\left( i |_{1}^{2} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ 2 \right]} \left( \prod_{k=1}^{2} x_{i_{k}} \right) & = \bm{\Omega^{\ast}} \left[ 0^{\left( n-2 \right)} , 1^{\left( 2 \right)} \right] = \frac{a_{n-2}}{a_{n}} \\
+		\sum_{\left( i |_{1}^{3} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ 3 \right]} \left( \prod_{k=1}^{3} x_{i_{k}} \right) & = \bm{\Omega^{\ast}} \left[ 0^{\left( n-3 \right)} , 1^{\left( 3 \right)} \right] = - \frac{a_{n-3}}{a_{n}} \\
+		\ldots \\
+		\sum_{\left( i |_{1}^{n-2} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ n-2 \right]} \left( \prod_{k=1}^{n-2} x_{i_{k}} \right) & = \bm{\Omega^{\ast}} \left[ 0^{\left( 2 \right)} , 1^{\left( n-2 \right)} \right] = (-1)^{n-2} \cdot \frac{a_{2}}{a_{n}} \\
+		\sum_{\left( i |_{1}^{n-1} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ n-1 \right]} \left( \prod_{k=1}^{n-1} x_{i_{k}} \right) & = \bm{\Omega^{\ast}} \left[ 0^{\left( 1 \right)} , 1^{\left( n-1 \right)} \right] = (-1)^{n-1} \cdot \frac{a_{1}}{a_{n}} \\
+		\sum_{\left( i |_{1}^{n} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ n \right]} \left( \prod_{k=1}^{n} x_{i_{k}} \right) & = \bm{\Omega^{\ast}} \left[ 0^{\left( 0 \right)} , 1^{\left( n \right)} \right] = (-1)^{n} \cdot \frac{a_{0}}{a_{n}}
+		\end{aligned}
+		\right. \.
+	\end{equation}
+	
+	对于形如 $\Omega^{\ast} \left[ 0^{\left( n-m \right)} , 1^{\left( m \right)} \right] \quad \left( m \in \mathbb{Z} |_{1}^{n} \right)$ 的 $n$ 元齐次轮换式\, 称其为 $n$ 元基本轮换式\.
+	
+	\subsection{命题3} \label{sec:3.4}
+	任意的 $n$ 元齐次轮换式都可以由若干个 $n$ 元基本轮换式有理表示\.
+	
+	\textbf{证明} \quad 即证\: $\forall \ m \in \mathbb{N^{\ast}} \A t |_{0}^{m} \in \mathbb{N}$ (其中 $t_{m} \neq 0$) \, 齐次轮换式 $$\bm{\Omega^{\ast}} \left[ 0^{\left( t_{0} \right)} , 1^{\left( t_{1} \right)} , 2^{\left( t_{2} \right)} , \ldots , \left( m-2 \right)^{\left( t_{m-2} \right)} , \left( m-1 \right)^{\left( t_{m-1} \right)} , m^{\left( t_{m} \right)} \right]$$ 可由若干个基本轮换式有理表示\.
+	
+	令 $n = \sum_{i=0}^{m} t_{i}$ \, 考察 $n$ 元齐次多项式 $\bm{\omega^{\ast}} \left[ 0^{\left( t_{0} \right)} , 1^{\left( t_{1} \right)} , \ldots , m^{\left( t_{m} \right)} \right]$ 与 $n$ 元基本多项式 $\bm{\Omega^{\ast}} \left[ 0^{\left( n-h \right)} , 1^{\left( h \right)}\right] \quad \left( h \in \mathbb{Z} |_{1}^{n} \right)$ 的乘积\:
+	\begin{align*}
+		& \bm{\omega^{\ast}} \left[ 0^{\left( t_{0} \right)} , 1^{\left( t_{1} \right)} , \dots , m^{\left( t_{m} \right)} \right] \cdot \bm{\Omega^{\ast}} \left[ 0^{\left( n-h \right)} , 1^{\left( h \right)}\right] \\
+		= & \sum_{\left( k |_{0}^{m} \right) \in \bm{\hat{\Psi}}_{h} \left[ m+1 \right]} \left( \prod_{i=0}^{m} C_{t_{i}}^{k_{i}} \cdot \bm{\omega^{\ast}} \left[ 0^{\left( t_{0} - k_{0} \right)} , 1^{\left( t_{1} + k_{0} - k_{1} \right)} , 2^{\left( t_{2} + k_{1} - k_{2} \right)} , \ldots , \left( m-1 \right)^{\left( t_{m-1} + k_{m-2} - k_{m-1} \right)} , m^{\left( t_{m} + k_{m-1} - k_{m} \right)} , \left( m+1 \right) ^{\left( k_{m} \right)} \right] \right) \\
+		= & C_{t_{m}}^{h} \cdot \bm{\omega^{\ast}} \left[ 0^{\left( t_{0} \right)} , 1^{\left( t_{1} \right)} , 2^{\left( t_{2} \right)} , \ldots , \left( m-1 \right)^{\left( t_{m-1} \right)} , m^{\left( t_{m} - h \right)} , \left( m+1 \right)^{\left( h \right)} \right] + \sum_{j=0}^{h-1} \sum_{\left( k |_{0}^{m-1} \right) \in \bm{\hat{\Psi}}_{h-j} \left[ m \right]} \Bigg( \prod_{i=0}^{m-1} C_{t_{i}}^{k_{i}} \cdot C_{t_{m}}^{j} \Bigg. \\
+		& \Bigg. \cdot \bm{\omega^{\ast}} \left[ 0^{\left( t_{0} - k_{0} \right)} , 1^{\left( t_{1} + k_{0} - k_{1} \right)} , 2^{\left( t_{2} + k_{1} - k_{2} \right)} , \ldots , \left( m-1 \right)^{\left( t_{m-1} + k_{m-2} - k_{m-1} \right)} , m^{\left( t_{m} + k_{m-1} - j \right)} , \left( m+1 \right)^{\left( j \right)} \right] \Bigg) \.
+	\end{align*}
+	
+	进行代换 $m \mapsto m-1$ \:
+	\begin{align*}
+		& \bm{\omega^{\ast}} \left[ 0^{\left( t_{0} \right)} , 1^{\left( t_{1} \right)} , \ldots , \left( m-1\right)^{\left( t_{m-1} \right)} \right] \cdot \bm{\Omega^{\ast}} \left[ 0^{\left( n-h \right)} , 1^{\left( h \right)} \right] \\
+		= & C_{t_{m-1}}^{h} \cdot \bm{\omega^{\ast}} \left[ 0^{\left( t_{0} \right)} , 1^{\left( t_{1} \right)} , 2^{\left( t_{2} \right)} , \ldots , \left( m-2 \right)^{\left( t_{m-2} \right)} , \left( m-1 \right)^{\left( t_{m-1} - h \right)} , m^{\left( h \right)} \right] + \sum_{j=0}^{h-1} \sum_{\left( k |_{0}^{m-2} \right) \in \bm{\hat{\Psi}}_{h-j} \left[ m-1 \right]} \Bigg( \prod_{i=0}^{m-2} C_{t_{i}}^{k_{i}} \cdot C_{t_{m-1}}^{j} \Bigg. \\
+		& \Bigg. \cdot \bm{\omega^{\ast}} \left[ 0^{\left( t_{0} - k_{0} \right)} , 1^{\left( t_{1} + k_{0} - k_{1} \right)} , 2^{\left( t_{2} + k_{1} - k_{2} \right)} , \ldots , \left( m-2 \right)^{\left( t_{m-2} + k_{m-3} - k_{m-2} \right)} , \left( m-1 \right)^{\left( t_{m-1} + k_{m-2} - j \right)} , m^{\left( j \right)} \right] \Bigg) \.
+	\end{align*}
+	
+	进行代换 $t_{m-1} \mapsto t_{m-1} + t_{m} \A h \mapsto t_{m}$ \:
+	\begin{align*}
+		& \bm{\omega^{\ast}} \left[ 0^{\left( t_{0} \right)} , 1^{\left( t_{1} \right)} , \ldots , \left( m-1 \right)^{\left( t_{m-1} + t_{m} \right)} \right] \cdot \bm{\Omega^{\ast}} \left[ 0^{\left( n-t_{m} \right)} , 1^{\left( t_{m} \right)} \right] \\
+		= & C_{t_{m-1} + t_{m}}^{t_{m}} \cdot \bm{\omega^{\ast}} \left[ 0^{\left( t_{0} \right)} , 1^{\left( t_{1} \right)} , 2^{\left( t_{2} \right)} , \ldots , \left( m-2 \right)^{\left( t_{m-2} \right)} , \left( m-1 \right)^{\left( t_{m-1}\right) } , m^{\left( t_{m} \right)} \right] + \sum_{j=0}^{t_{m}-1} \sum_{\left( k |_{0}^{m-2} \right) \in \bm{\hat{\Psi}}_{t_{m}-j} \left[ m-1 \right]} \Bigg( \prod_{i=0}^{m-2} C_{t_{i}}^{k_{i}} \cdot C_{t_{m-1} + t_{m}}^{j} \Bigg. \\
+		& \Bigg. \cdot \bm{\omega^{\ast}} \left[ 0^{\left( t_{0} - k_{0} \right)} , 1^{\left( t_{1} + k_{0} - k_{1} \right)} , 2^{\left( t_{2} + k_{1} - k_{2} \right)} , \ldots , \left( m-2 \right)^{\left( t_{m-2} + k_{m-3} - k_{m-2} \right)} , \left( m-1 \right)^{\left( t_{m-1} + t_{m} + k_{m-2} - j \right)} , m^{\left( j \right)} \right] \Bigg) \.
+	\end{align*}
+	
+	经过整理得到
+	\begin{align} \label{eqn:4}
+		& \bm{\omega^{\ast}} \left[ 0^{\left( t_{0} \right)} , 1^{\left( t_{1} \right)} , 2^{\left( t_{2} \right)} , \ldots , \left( m-2 \right)^{\left( t_{m-2} \right)} , \left( m-1 \right)^{\left( t_{m-1} \right)} , m^{\left( t_{m} \right)} \right] \notag \\
+		= & \left( C_{t_{m-1} + t_{m}}^{t_{m}} \right)^{-1} \cdot \Bigg( \bm{\omega^{\ast}} \left[ 0^{\left( t_{0} \right)} , 1^{\left( t_{1} \right)} , \ldots , \left( m-1 \right)^{\left( t_{m-1} + t_{m} \right)} \right] \cdot \bm{\Omega^{\ast}} \left[ 0^{\left( n-t_{m} \right)} , 1^{\left( t_{m} \right)} \right] - \sum_{j=0}^{t_{m}-1} \sum_{\left( k |_{0}^{m-2} \right) \in \bm{\hat{\Psi}}_{t_{m}-j} \left[ m-1 \right]} \Bigg( \prod_{i=0}^{m-2} C_{t_{i}}^{k_{i}} \cdot C_{t_{m-1} + t_{m}}^{j} \Bigg. \Bigg. \notag \\
+		& \Bigg. \Bigg. \cdot \bm{\omega^{\ast}} \left[ 0^{\left( t_{0} - k_{0} \right)} , 1^{\left( t_{1} + k_{0} - k_{1} \right)} , 2^{\left( t_{2} + k_{1} - k_{2} \right)} , \ldots , \left( m-2 \right)^{\left( t_{m-2} + k_{m-3} - k_{m-2} \right)} , \left( m-1 \right)^{\left( t_{m-1} + t_{m} + k_{m-2} - j \right)} , m^{\left( j \right)} \right] \Bigg) \Bigg) \.
+	\end{align}
+	
+	由式 \eqref{eqn:2} 和式 \eqref{eqn:4} \, 我们可以通过有限次迭代的方式得到用若干个 $n$ 元基本轮换式的有理运算表示任意齐次轮换式 $$\bm{\Omega^{\ast}} \left[ 0^{\left( t_{0} \right)} , 1^{\left( t_{1} \right)} , 2^{\left( t_{2} \right)} , \ldots , \left( m-2 \right)^{\left( t_{m-2} \right)} , \left( m-1 \right)^{\left( t_{m-1} \right)} , m^{\left( t_{m} \right)} \right]$$ 的方式\. 证毕\.
+	
+	\subsection{命题4} \label{sec:3.5}
+	$\forall \ l \in \mathbb{N^{\ast}} \A m \in \mathbb{Z} |_{1}^{l}$ \, $x |_{1}^{l}$ 均为参数\, 对于任意的 $n$ 次多项式函数 $f(x) = \sum_{i=0}^{n} \left( a_{i} x^{i} \right)$ \, $$\sum_{\left( i |_{1}^{m} \right) \in \bm{\vec{\Psi}}_{1}^{l} \left[ m \right]} \left( \prod_{k=1}^{m} f \left( x_{i_{k}} \right) \right)$$ 可由若干个 $l$ 元齐次轮换式以及 $a |_{0}^{n}$ 有理表示\.
+	
+	\textbf{证明}
+	\begin{align*}
+		& \sum_{\left( i |_{1}^{m} \right) \in \bm{\vec{\Psi}}_{1}^{l} \left[ m \right]} \left( \prod_{k=1}^{m} f \left( x_{i_{k}} \right) \right) \\
+		= & \sum_{\left( i |_{1}^{m} \right) \in \bm{\vec{\Psi}}_{1}^{l} \left[ m \right] } \left( \prod_{k=1}^{m} \left( \sum_{j=0}^{n} \left( a_{j} x_{i_{k}}^{j} \right) \right) \right) \\
+		= & \sum_{t=1}^{m} \sum_{\left( q |_{1}^{t} \right) \in \bm{\hat{\Psi}}_m^{\bm{\ast}} \left[ t \right]} \sum_{\left( p |_{1}^{t} \right) \in \bm{\vec{\Psi}}_{0}^{n} \left[ t \right]} \left( \prod_{r=1}^{t} a_{p_{r}}^{q_{r}} \cdot \sum_{\left( i |_{1}^{m} \right) \in \bm{\vec{\Psi}}_{1}^{l} \left[ m \right]} \sum_{\left( j |_{1}^{m} \right) \in \bm{\Psi^{\ast}} \left[ p^{\left( q \right)} |_{1}^{t} \right]} \left( \prod_{k=1}^{m} x_{i_{k}}^{j_{k}} \right) \right) \\
+		= & a_{0}^{m} + \sum_{s=1}^{m} \left( C_{l-m+s}^{s} \cdot a_{0}^{m-s} \cdot \left( \sum_{t=1}^{s} \sum_{\left( q |_{1}^{t} \right) \in \bm{\hat{\Psi}}_m^{\bm{\ast}} \left[ t \right]} \sum_{\left( p |_{1}^{t} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ t \right]} \left( \prod_{r=1}^{t} a_{p_{r}}^{q_{r}} \cdot \sum_{\left( i |_{1}^{m} \right) \in \bm{\vec{\Psi}}_{1}^{l} \left[ m \right]} \sum_{\left( j |_{1}^{m} \right) \in \bm{\Psi^{\ast}} \left[ p^{\left( q \right)} |_{1}^{t} \right]} \left( \prod_{k=1}^{m} x_{i_{k}}^{j_{k}} \right) \right) \right) \right) \\
+		= & a_{0}^{m} + \sum_{s=1}^{m} \left( C_{l-m+s}^{s} \cdot a_{0}^{m-s} \cdot \left( \sum_{t=1}^{s} \sum_{\left( q |_{1}^{t} \right) \in \bm{\hat{\Psi}}_m^{\bm{\ast}} \left[ t \right]} \sum_{\left( p |_{1}^{t} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ t \right]} \left( \prod_{r=1}^{t} a_{p_{r}}^{q_{r}} \cdot \sum_{\left( i |_{1}^{l} \right) \in \bm{\vec{\Psi}}_{1}^{l} \left[ l \right]} \sum_{\left( j |_{1}^{l} \right) \in \bm{\Psi^{\ast}} \left[ 0^{\left( l-m \right)} , p^{\left( q \right)} |_{1}^{t} \right]} \left( \prod_{k=1}^{l} x_{i_{k}}^{j_{k}} \right) \right) \right) \right) \\
+		= & a_{0}^{m} + \sum_{s=1}^{m} \left( C_{l-m+s}^{s} \cdot a_{0}^{m-s} \cdot \left( \sum_{t=1}^{s} \sum_{\left( q |_{1}^{t} \right) \in \bm{\hat{\Psi}}_m^{\bm{\ast}} \left[ t \right]} \sum_{\left( p |_{1}^{t} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ t \right]} \left( \prod_{r=1}^{t} a_{p_{r}}^{q_{r}} \cdot \sum_{\left( j |_{1}^{l} \right) \in \bm{\Psi^{\ast}} \left[ 0^{\left( l-m \right)} , p^{\left( q \right)} |_{1}^{t} \right]} \left( \prod_{k=1}^{l} x_{k}^{j_{k}} \right) \right) \right) \right) \\
+		= & a_{0}^{m} + \sum_{s=1}^{m} \left( C_{l-m+s}^{s} \cdot a_{0}^{m-s} \cdot \left( \sum_{t=1}^{s} \sum_{\left( q |_{1}^{t} \right) \in \bm{\hat{\Psi}}_m^{\bm{\ast}} \left[ t \right]} \sum_{\left( p |_{1}^{t} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ t \right]} \left( \prod_{r=1}^{t} a_{p_{r}}^{q_{r}} \cdot \bm{\Omega^{\ast}} \left[ 0^{\left( l-m \right)} , p^{\left( q \right)} |_{1}^{t} \right] \right) \right) \right) \.
+	\end{align*}
+	
+	证毕\.
+	
+	\subsection{推论2} \label{sec:3.6}
+	$\forall \ n \in \mathbb{N^{\ast}} \A m \in \mathbb{Z} |_{1}^{n}$ \, $x |_{1}^{n}$ 均为参数\, 对于任意的 $l$ 次多项式函数 $g(x) = \sum_{i=0}^{l} \left( b_{i} x^{i} \right)$ \, $$\sum_{\left( i |_{1}^{m} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ m \right]} \left( \prod_{k=1}^{m} g \left( x_{i_{k}} \right) \right)$$ 可由若干个 $n$ 元基本轮换式以及 $b |_{0}^{l}$ 有理表示\.
+	
+	该推论可由 \underline{\nameref{sec:3.2}} \, \underline{\nameref{sec:3.4}} 和 \underline{\nameref{sec:3.5}} 推得\.
+	
+	\subsection{推论3} \label{sec:3.7}
+	对于任意的 $n$ 次多项式函数 $f(x) = \sum_{i=0}^{n} \left( a_{i} x^{i} \right)$ 和 $l$ 次多项式函数 $g(x) = \sum_{i=0}^{l} \left( b_{i} x^{i} \right)$ \, 必然存在一个 $n$ 次多项式函数 $h(x) = \sum_{i=0}^{n} \left( c_{i} x^{i} \right)$ \, 使得 $$f(X) = 0 \Leftrightarrow h \left( g(X) \right) = 0$$ 且函数 $h(x)$ 的各项系数 $c |_{0}^{n}$ 均可由 $a |_{0}^{n} , b |_{0}^{l}$ 有理表示\.
+	
+	该推论可由 \underline{\nameref{sec:3.3}} 和 \underline{\nameref{sec:3.6}} 推得\.
+	
+	\section{命题证明}
+	记代数数系数方程为
+	\begin{equation} \label{eqn:5}
+		f(x) = a_{n} x^{n} + a_{n-1} x^{n-1} + \cdots + a_{1} x + a_{0} = 0 \quad \left( n \in \mathbb{N^{\ast}} \A a |_{0}^{n} \in \mathbb{A} \A a_{n} \neq 0 \A x \in \mathbb{C} \right) \.
+	\end{equation}
+	
+	记式 \eqref{eqn:5} 的一个根为 $X$ \, 即
+	\begin{equation} \label{eqn:6}
+		f(X) = 0 \.
+	\end{equation}
+	
+	根据代数数的定义\, 式 \eqref{eqn:5} 中各项系数分别为一个整系数方程的根\. 令 $a_{i} \quad \left( i \in \mathbb{Z} |_{0}^{n} \right)$ 为 $p_{i}$ 次代数数 ($p_{i} \in \mathbb{N^{\ast}}$) \, 记之如下\:
+	\begin{equation*}
+		f_{m} (x) = w_{m}^{\left( p_{m} \right)} x^{p_{m}} + w_{m}^{\left( p_{m}-1 \right)} x^{p_{m}-1} + \cdots + w_{m}^{\left( 1 \right)} x + w_{m}^{\left( 0 \right)} \quad \left( m \in \mathbb{Z} |_{0}^{n} \A p_{m} \in \mathbb{N}^{ \ast } \A w_{m}^{\left( j \right)} \in \mathbb{Z} \A w_{m}^{\left( p_{m} \right)} \neq 0 \A x \in \mathbb{C} \quad \left( j \in \mathbb{Z} |_{0}^{p_{i}} \right) \right) \,
+	\end{equation*}
+	即
+	\begin{equation}
+		\begin{aligned}
+		& \left\{
+		\begin{aligned}
+		f_{n} (x) & = w_{n}^{\left( p_{n} \right)} x^{p_{n}} + w_{n}^{\left( p_{n}-1 \right)} x^{p_{n}-1} + \cdots + w_{n}^{\left( 1 \right)} x + w_{n}^{\left( 0 \right)} \\
+		f_{n-1} (x) & = w_{n-1}^{\left( p_{n-1} \right)} x^{p_{n-1}} + w_{n-1}^{\left( p_{n-1}-1 \right)} x^{p_{n-1}-1} + \cdots + w_{n-1}^{\left( 1 \right)} x + w_{n-1}^{\left( 0 \right)} \\
+		f_{n-2} (x) & = w_{n-2}^{\left( p_{n-2} \right)} x^{p_{n-2}} + w_{n-2}^{\left( p_{n-2}-1 \right)} x^{p_{n-2}-1} + \cdots + w_{n-2}^{(1)} x + w_{n-2}^{(0)} \\
+		\ldots \\
+		f_{1} (x) & = w_{1}^{\left( p_{1} \right)} x^{p_{1}} + w_{1}^{\left( p_{1}-1 \right)} x^{p_{1}-1} + \cdots + w_{1}^{\left( 1 \right)} x + w_{1}^{\left( 0 \right)} \\
+		f_{0} (x) & = w_{0}^{\left( p_{0} \right)} x^{p_{0}} + w_{0}^{\left( p_{0}-1 \right)} x^{p_{0}-1} + \cdots + w_{0}^{\left( 1 \right)} x + w_{0}^{\left( 0 \right)}
+		\end{aligned}
+		\right. \\
+		& \left( p_{i} \in \mathbb{N}^{ \ast } \A w_{i}^{\left( j \right)} \in \mathbb{Z} \A w_{i}^{\left( p_{i} \right)} \neq 0 \A x \in \mathbb{C} \quad \left( i \in \mathbb{Z} |_{0}^{n} \A j \in \mathbb{Z} |_{0}^{p_{i}} \right) \right) \,
+		\end{aligned}
+	\end{equation}
+	其中 $a_{m} \quad \left( m \in \mathbb{Z} |_{0}^{n} \right)$ 是方程 $f_{m} (x) = 0$ 的根\.
+	
+	先将式 \eqref{eqn:6} 改写为关于 $a_{0}$ 的多项式方程 $$g_{0} \left( a_{0} \right) = 0 \. $$ 结合 \underline{\nameref{sec:3.7}} 以及 $f_{0} \left( a_{0} \right) = 0$ \, 可求得函数 $h_{0} (x)$ 使得 $$h_{0} \left( g_{0} \left( a_{0} \right) \right) = 0 \,$$ 且 $h_{0} (x)$ 的各项系数均可由$f_{0} (x) , g_{0} \left( a_{0} \right)$ 各项系数有理表示\, 即可由
+	\begin{equation} \label{eqn:7}
+		\begin{array}{l}
+		X , a_{n} , a_{n-1} , \ldots , a_{2} , a_{1} , \\
+		w_{0}^{\left( p_{0} \right)} , w_{0}^{\left( p_{0}-1 \right)} , \ldots , w_{0}^{\left( 1 \right)} , w_{0}^{\left( 0 \right)}
+		\end{array}
+	\end{equation}
+	有理表示\. 此时\, 方程变为
+	\begin{equation} \label{eqn:8}
+		h_{0} (0) = 0 \,
+	\end{equation}
+	可见方程中已经没有 $a_{0}$ \.
+	
+	下一步\, 由于式 \eqref{eqn:8} 中各项系数为式 \eqref{eqn:7} 中各数的有理表示\, 故可以将式 \eqref{eqn:8} 改写为关于 $a_{1}$ 的多项式方程 $$g_{1} \left( a_{1} \right) = 0 \. $$ 结合 \underline{\nameref{sec:3.7}} 以及 $f_{1} \left( a_{1} \right) = 0$ \, 可求得函数 $h_{1} (x)$ 使得 $$h_{1} \left( g_{1} \left( a_{1} \right) \right) = 0 \,$$ 且 $h_{1} (x)$ 的各项系数均可由 $f_{1} (x) , g_{1} \left( a_{1} \right)$ 各项系数有理表示\. 注意到 $g_{1} \left( a_{1} \right)$ 的各项系数均可由式 \eqref{eqn:7} 中的数有理表示\. 结合 \underline{\nameref{sec:3.2}} \, 可知函数 $h_{1} (x)$ 的各项系数均可由
+	\begin{equation}
+		\begin{array}{l}
+		X , a_{n} , a_{n-1} , \ldots , a_{3} , a_{2} , \\
+		w_{0}^{\left( p_{0} \right)} , w_{0}^{\left( p_{0}-1 \right)} , \ldots , w_{0}^{\left( 1 \right)} , w_{0}^{\left( 0 \right)} , \\
+		w_{1}^{\left( p_{1} \right)} , w_{1}^{\left( p_{1}-1 \right)} , \ldots , w_{1}^{\left( 1 \right)} , w_{1}^{\left( 0 \right)}
+		\end{array}
+	\end{equation}
+	有理表示\. 此时\, 方程变为 $$h_{1} (0) = 0 \, $$ 可见方程中已经没有 $a_{1}$ \.
+	
+	类似地\, 原代数数系数方程可以经过这样的恒等变形\, 将式中的 $a_{i} \quad \left( i \in \mathbb{Z} |_{0}^{n} \right)$ 逐个代换\. 当进行到第 $\left( n+1 \right)$ 步操作时\, 方程中已经没有 $a |_{0}^{n-1}$ \, 得到关于 $a_{n}$ 的多项式方程 $$g_{n} \left( a_{n} \right) = 0 \. $$ 结合 \underline{\nameref{sec:3.7}} 以及 $f_{n} \left( a_{n} \right) = 0$ \, 可求得函数 $h_{n} (x)$ 使得 $$h_{n} \left( g_{n} \left( a_{n} \right) \right) = 0 \,$$ 且 $h_{n} (x)$ 的各项系数均可由 $f_{n} (x) , g_{n} \left( a_{n} \right)$ 各项系数有理表示\. 结合 \underline{\nameref{sec:3.2}} \, 可知函数 $h_{n} (x)$ 的各项系数均可由
+	\begin{equation}
+		\begin{array}{l}
+		X , \\
+		w_{0}^{\left( p_{0} \right)} , w_{0}^{\left( p_{0}-1 \right)} , \ldots , w_{0}^{\left( 1 \right)} , w_{0}^{\left( 0 \right)} , \\
+		w_{1}^{\left( p_{1} \right)} , w_{1}^{\left( p_{1}-1 \right)} , \ldots , w_{1}^{\left( 1 \right)} , w_{1}^{\left( 0 \right)} , \\
+		\ldots , \\
+		w_{n-1}^{\left( p_{n-1} \right)} , w_{n-1}^{\left( p_{n-1}-1 \right)} , \ldots , w_{n-1}^{\left( 1 \right)} , w_{n-1}^{\left( 0 \right)} , \\
+		w_{n}^{\left( p_{n} \right)} , w_{n}^{\left( p_{n}-1 \right)} , \ldots , w_{n}^{\left( 1 \right)} , w_{n}^{\left( 0 \right)}
+		\end{array}
+	\end{equation}
+	有理表示\. 此时\, 方程变为
+	\begin{equation} \label{eqn:9}
+		h_{n} \left( 0 \right) = 0 \.
+	\end{equation}
+	至此\, $a |_{0}^{n}$ 都被代换完毕\.
+	
+	最后\, 把式 \eqref{eqn:9} 改写为关于 $X$ 的方程
+	\begin{equation} \label{eqn:10}
+		f^{\ast} (X) = 0 \.
+	\end{equation}
+	式 \eqref{eqn:10} 的各项系数均可由
+	\begin{equation} \label{eqn:11}
+		\begin{array}{l}
+		w_{0}^{\left( p_{0} \right)} , w_{0}^{\left( p_{0}-1 \right)} , \ldots , w_{0}^{\left( 1 \right)} , w_{0}^{\left( 0 \right)} , \\
+		w_{1}^{\left( p_{1} \right)} , w_{1}^{\left( p_{1}-1 \right)} , \ldots , w_{1}^{\left( 1 \right)} , w_{1}^{\left( 0 \right)} , \\
+		\ldots , \\
+		w_{n-1}^{\left( p_{n-1} \right)} , w_{n-1}^{\left( p_{n-1}-1 \right)} , \ldots , w_{n-1}^{\left( 1 \right)} , w_{n-1}^{\left( 0 \right)} , \\
+		w_{n}^{\left( p_{n} \right)} , w_{n}^{\left( p_{n}-1 \right)} , \ldots , w_{n}^{\left( 1 \right)} , w_{n}^{\left( 0 \right)}
+		\end{array}
+	\end{equation}
+	有理表示\. 注意到式 \eqref{eqn:11} 中各数都是整数\, 故式 \eqref{eqn:10} 的各项系数必然都是有理数\, 再将该式乘以公分母\, 即得到了一个关于 $x$ 的整系数方程
+	\begin{equation} \label{eqn:12}
+		F(x) = 0 \,
+	\end{equation}
+	且 $X$ 满足 $F(X) = 0$ \, 从而 $X$ 为代数数\. 证毕\.
+	
+	\section{一些结论}
+	\bm{$1^{\circ}$} \quad 由 \underline{\nameref{sec:3.1}} 的证明过程中归纳得到下列公式 (其中 $a |_{1}^{n}$ 为参数) \:
+	\begin{equation}
+		\left( \sum_{i=1}^{n} a_{i} \right)^{m} = \sum_{t=1}^{m} \sum_{\left( q |_{1}^{t} \right) \in \bm{\hat{\Psi}}_m^{\bm{\ast}} \left[ t \right]} \sum_{\left( p |_{1}^{t} \right) \in \bm{\vec{\Psi}}_{1}^{n} \left[ t \right]} \left( m! \cdot \left( \prod_{i=1}^{t} q_{i}! \right)^{-1} \cdot \prod_{r=1}^{t} a_{p_{r}}^{q_{r}} \right) \quad \left( m , n \in \mathbb{N^{\ast}} \right) \.
+	\end{equation}
+	
+	\bm{$2^{\circ}$} \quad 由 \underline{\nameref{sec:3.3}} 的证明过程中各式的项数比较得到下列公式\:
+	\begin{equation}
+		C_{\sum_{i=1}^{n} p_{i}}^{Q} = \sum_{q |_{1}^{n} \in \bm{\hat{\Psi}}_{Q} \left[ n \right]} \left( \prod_{i=1}^{n} C_{p_{i}}^{q_{i}} \right) \quad \left( Q \in \mathbb{N} \A q |_{1}^{n} \in \mathbb{N} \right) \.
+	\end{equation}
+	
+	\bm{$3^{\circ}$} \quad 由 \underline{\nameref{sec:3.4}} 的证明过程中各式的项数比较得到下列公式 (其中 $n$ 为参数) \:
+	\begin{align}
+		& n^{m} = \sum_{i=1}^{m} \left( C_{n}^{i} \cdot \sum_{j |_{1}^{i} \in \bm{\hat{\Psi}}_{m}^{\bm{\ast}} \left[ i \right]} \left( \prod_{k=1}^{i} C_{m - \sum_{l=1}^{k-1} j_{l}}^{j_{k}} \right) \right) = m! \cdot \sum_{i=1}^{m} \left( C_{n}^{i} \cdot \sum_{j |_{1}^{i} \in \bm{\hat{\Psi}}_{m}^{\bm{\ast}} \left[ i \right]} \left( \prod_{k=1}^{i} j_{k}! \right)^{-1} \right) \quad \left( m , n \in \mathbb{N^{\ast}} \right) ; \\
+		& C_{l}^{m} \cdot \left( n+1 \right)^{m} = \sum_{i=0}^{m} \left( C_{l}^{m-i} \cdot C_{l-m+i}^{i} \cdot n^{m-i} \right) \quad \left( l , m \in \mathbb{N} \A l \geq m \right) \.
+	\end{align}
+	
+	\bm{$4^{\circ}$} \quad 本文用了构造的方式证明了原命题\, 按照此方式得到的式 \eqref{eqn:12} \, 其次数为 $$n \cdot \prod_{i=0}^{n} p_{i} \.$$
+	若 $X$ 为 $N$ 次代数数 ($N \in \mathbb{N^{\ast}}$) \, 则 $N \leq n \cdot \prod_{i=0}^{n} p_{i}$ \.
+	
+	\bm{$5^{\circ}$} \quad 所有代数数构成一个数域\, 即代数数域\, 记作 $\mathbb{A}$ \. 代数数域是复数域 $\mathbb{C}$ 的一个子集\.
+	
+\end{document}
