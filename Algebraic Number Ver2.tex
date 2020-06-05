@@ -1,0 +1,694 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{ctex}
+\usepackage{geometry}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage[colorlinks, linkcolor=black, anchorcolor=black, citecolor=black]{hyperref}
+
+\newcommand\BrSetN[1]{\Set{\MathPartialSetN{#1}}}
+\newcommand\BrSetU[1]{\Set{\MathPartialSetU{#1}}}
+\newcommand\BrSetZ[2]{\Set{\MathPartialSetZ{#1}{#2}}}
+\newcommand\InPartialSetN[2]{\InSet{#1}{\BrSetN{#2}}}
+\newcommand\InPartialSetU[2]{\InSet{#1}{\BrSetU{#2}}}
+\newcommand\InPartialSetZ[3]{\InSet{#1}{\BrSetZ{#2}{#3}}}
+\newcommand\InSetA[1]{\InSet{#1}{\MathSetA}}
+\newcommand\InSetC[1]{\InSet{#1}{\MathSetC}}
+\newcommand\InSetN[1]{\InSet{#1}{\MathSetN}}
+\newcommand\InSetQ[1]{\InSet{#1}{\MathSetQ}}
+\newcommand\InSetU[1]{\InSet{#1}{\MathSetU}}
+\newcommand\InSetZ[1]{\InSet{#1}{\MathSetZ}}
+\newcommand\MathPartialSetN[1]{\mathbb{N}_{#1}}
+\newcommand\MathPartialSetU[1]{\mathbb{N}^{\ast}_{#1}}
+\newcommand\MathPartialSetZ[2]{\mathbb{Z}_{\MultiSub{#1}{#2}}}
+\newcommand\MathSetA{\mathbb{A}}
+\newcommand\MathSetC{\mathbb{C}}
+\newcommand\MathSetN{\mathbb{N}}
+\newcommand\MathSetQ{\mathbb{Q}}
+\newcommand\MathSetU{\mathbb{N}^{\ast}}
+\newcommand\MathSetZ{\mathbb{Z}}
+\newcommand\NormalProdOfN[3]{\ProdOfN{#1}{#2} #3_{#1}}
+\newcommand\NormalSeqOfN[3]{\SeqOfN{#1}{#2} #3_{#1}}
+\newcommand\NormalSeqOfU[3]{\SeqOfU{#1}{#2} #3_{#1}}
+\newcommand\NormalSeqOfZ[4]{\SeqOfZ{#1}{#2}{#3} #4_{#1}}
+\newcommand\NormalSumOfN[3]{\SumOfN{#1}{#2} #3_{#1}}
+\newcommand\NormalSumOfU[3]{\SumOfU{#1}{#2} #3_{#1}}
+\newcommand\ProdOfN[2]{\prod_{#1}^{\BrSetN{#2}}}
+\newcommand\ProdOfU[2]{\prod_{#1}^{\BrSetU{#2}}}
+\newcommand\SeqSetN[3]{\Set{\NormalSeqOfN{#1}{#2}{#3}}}
+\newcommand\SeqSetU[3]{\Set{\NormalSeqOfU{#1}{#2}{#3}}}
+\newcommand\SeqSetZ[4]{\Set{\NormalSeqOfZ{#1}{#2}{#3}{#4}}}
+\newcommand\SeqOfNInSetA[3]{\SeqOfN{#1}{#2} \Bracket{\InSetA{#3_{#1}}}}
+\newcommand\SeqOfNInSetC[3]{\SeqOfN{#1}{#2} \Bracket{\InSetC{#3_{#1}}}}
+\newcommand\SeqOfNInSetN[3]{\SeqOfN{#1}{#2} \Bracket{\InSetN{#3_{#1}}}}
+\newcommand\SeqOfNInSetQ[3]{\SeqOfN{#1}{#2} \Bracket{\InSetQ{#3_{#1}}}}
+\newcommand\SeqOfNInSetZ[3]{\SeqOfN{#1}{#2} \Bracket{\InSetZ{#3_{#1}}}}
+\newcommand\SeqOfUInSetC[3]{\SeqOfU{#1}{#2} \Bracket{\InSetC{#3_{#1}}}}
+\newcommand\SeqOfUInSetN[3]{\SeqOfU{#1}{#2} \Bracket{\InSetN{#3_{#1}}}}
+\newcommand\SeqOfUInSetQ[3]{\SeqOfU{#1}{#2} \Bracket{\InSetQ{#3_{#1}}}}
+\newcommand\SeqOfUInSetU[3]{\SeqOfU{#1}{#2} \Bracket{\InSetU{#3_{#1}}}}
+\newcommand\SeqOfN[2]{\Seq{#1}{\MathPartialSetN{#2}}}
+\newcommand\SeqOfU[2]{\Seq{#1}{\MathPartialSetU{#2}}}
+\newcommand\SeqOfZ[3]{\Seq{#1}{\MathPartialSetZ{#2}{#3}}}
+\newcommand\SumOfN[2]{\sum_{#1}^{\BrSetN{#2}}}
+\newcommand\SumOfU[2]{\sum_{#1}^{\BrSetU{#2}}}
+
+\newcommand\Abs[1]{\left| #1 \right|}
+\newcommand\Appose{\Comma}
+\newcommand\Base[2]{\PowerBracket{0}{#1-#2} \SeqComma \PowerBracket{1}{#2}}
+\newcommand\Because{\LogicAlignment{\because}}
+\newcommand\BigEmptyStuff{{}^{{}^{{}^{{}^{{}^{{}^{{}^{{}^{{}^{{}^{{}^{}}}}}}}}}}}\kern -0.4em}
+\newcommand\BoldBigOmega[2]{\BracketMidFunc{\Omega}{#1}{#2}}
+\newcommand\BoldBigOmegaBase[2]{\BoldBigOmega{#1}{\Base{#1}{#2}}}
+\newcommand\BoldBigOmegaSeq{\BoldBigOmega{\varphi}{\SeqLambda}}
+\newcommand\BoldOmega[2]{\BracketMidFunc{\omega}{#1}{#2}}
+\newcommand\BoldOmegaBase[2]{\BoldOmega{#1}{\Base{#1}{#2}}}
+\newcommand\BoldOmegaSeq{\BoldOmega{\varphi}{\SeqLambda}}
+\newcommand\BoldPsi[2]{\BracketMidFunc{\Psi}{#1}{#2}}
+\newcommand\BoldPsiHat[2]{\BracketMidFunc{\hat{\Psi}}{#1}{#2}}
+\newcommand\BoldPsiHatAst[2]{\BracketMidFuncAst{\hat{\Psi}}{#1}{#2}}
+\newcommand\BoldPsiSeq{\BoldPsi{\varphi}{\SeqLambda}}
+\newcommand\BoldPsiVecAst[2]{\BracketMidFuncAst{\vec{\Psi}}{#1}{#2}}
+\newcommand\Bracket[1]{\left( #1 \right)}
+\newcommand\BracketBig[1]{\left\{ #1 \right\}}
+\newcommand\BracketMid[1]{\left[ #1 \right]}
+\newcommand\BracketMidFunc[3]{\bm{#1}_{#2} \BracketMid{#3}}
+\newcommand\BracketMidFuncAst[3]{\bm{#1}^{\bm{\ast}}_{#2} \BracketMid{#3}}
+\newcommand\CaseDomain[1]{\DomainComma & #1}
+\newcommand\Colon{:}
+\newcommand\Comma{,}
+\newcommand\CommaAnd{\Space{\Comma}}
+\newcommand\CommaSub{\Comma}
+\newcommand\Count{\text{count}}
+\newcommand\DefineAs{:=}
+\newcommand\Domain[1]{\DomainComma \quad #1}
+\newcommand\DomainAnd{\LogicAnd}
+\newcommand\DomainComma{\Comma}
+\newcommand\EmptySet{\varnothing}
+\newcommand\Enumerate[1]{#1^{\circ}}
+\newcommand\Equivalent{\Logic{\leftrightarrow}}
+\newcommand\Exists[3]{\Satisfy{\exists}{#1}{#2}{#3}}
+\newcommand\FlatPolynomial{a_{n} \cdot x^{n} + a_{n-1} \cdot x^{n-1} + \cdots + a_{1} \cdot x + a_{0}}
+\newcommand\FlatSeqOfXi{\xi_{\delta} \SeqComma \xi_{\delta+1} \SeqComma \ldots \SeqComma \xi_{\varepsilon}}
+\newcommand\FlushSpace{\qquad}
+\newcommand\ForAll[3]{\Satisfy{\forall}{#1}{#2}{#3}}
+\newcommand\Func[2]{#1 \Bracket{#2}}
+\newcommand\GrowSeq[2]{\SeqOfU{i}{#1-1} \Bracket{#2_{i} < #2_{i+1}}}
+\newcommand\Implies{\Logic{\rightarrow}}
+\newcommand\InSet[2]{#1 \in #2}
+\newcommand\InPolynomialSet[2]{\InSet{#1}{\PolynomialSet{#2}}}
+\newcommand\Logic[1]{\ #1\ }
+\newcommand\LogicAlignment[1]{\Space{#1} &}
+\newcommand\LogicAnd{\Logic{\wedge}}
+\newcommand\MathEnumerate[1]{\Enumerate{#1} \quad}
+\newcommand\MultiSub[2]{#1 \CommaSub #2}
+\newcommand\NeqZero[1]{#1 \neq 0}
+\newcommand\NumbersSeqLambda{\PowerBracket{i}{\lambda_{i}}}
+\newcommand\NumbersSeqV[1]{\SeqOfN{i}{#1} \PowerBracket{i}{v_{i}}}
+\newcommand\NumbersSeqVBar[1]{\SeqOfN{i}{#1} \PowerBracket{i}{\bar{v}_{i}}}
+\newcommand\Polynomial[2]{\SumOfN{i}{#1} \Bracket{#2_{i} \cdot x^{i}}}
+\newcommand\PolynomialA[1]{\PolynomialSub{#1}{a}{n}}
+\newcommand\PolynomialB[1]{\PolynomialSub{#1}{b}{m}}
+\newcommand\PolynomialC[1]{\PolynomialSub{#1}{c}{n}}
+\newcommand\PolynomialDefault{\Polynomial{n}{a}}
+\newcommand\PolynomialSet[1]{\mathbf{P}_{#1}}
+\newcommand\PolynomialSub[3]{\SumOfN{i}{#3_{#1}} \Bracket{#2_{\MultiSub{#1}{i}} \cdot x^{i}}}
+\newcommand\PowerBracket[2]{#1^{\Bracket{#2}}}
+\newcommand\ProgressEq{\LogicAlignment{=}}
+\newcommand\RationalEx{\stackrel{\MathSetQ}{\dashrightarrow}}
+\newcommand\Satisfy[4]{\Space{#1} #2 \SuchThat #3 \Space{\Colon} #4}
+\newcommand\Seq[2]{\biguplus_{#1}^{#2}}
+\newcommand\SeqComma{\Comma}
+\newcommand\SeqLambda{\SeqOfN{i}{\eta} \NumbersSeqLambda}
+\newcommand\SeqNSub[4]{\SeqOfN{#1}{#2} #3_{\MultiSub{#4}{#1}}}
+\newcommand\SeqNSubASp[1]{a_{\MultiSub{#1}{n_{#1}}}^{-1} \SeqComma \SeqNSub{i}{n_{#1}-1}{a}{#1}}
+\newcommand\SeqSetNA{\SeqSetN{i}{n}{a}}
+\newcommand\SeqSetNASp{\Set{a_{n}^{-1} \SeqComma \NormalSeqOfN{i}{n-1}{a}}}
+\newcommand\SeqSetNB{\SeqSetN{i}{m}{b}}
+\newcommand\SeqSetNC{\SeqSetN{i}{n}{c}}
+\newcommand\SeqSetNSubASpMulti[1]{\Set{\SeqOfN{j}{#1} \Bracket{\SeqNSubASp{j}}}}
+\newcommand\SeqSetNSubASp[1]{\Set{\SeqNSubASp{#1}}}
+\newcommand\SeqSetNSubB[1]{\Set{\SeqNSub{i}{m_{#1}}{b}{#1}}}
+\newcommand\SeqSetNSubC[1]{\Set{\SeqNSub{i}{n_{#1}}{c}{#1}}}
+\newcommand\SeqXi{\NormalSeqOfU{i}{\varphi}{\xi}}
+\newcommand\Set[1]{\BracketBig{#1}}
+\newcommand\SetDefAnd{\LogicAnd}
+\newcommand\SetDefinition[2]{\Set{\left. #1 \ \right| #2}}
+\newcommand\Space[1]{#1\ }
+\newcommand\SubSetQ[1]{#1 \subseteq \MathSetQ}
+\newcommand\SuchThat{\Logic{\Logic{\text{s.t.}}}}
+\newcommand\SumPsiHat[4]{\sum_{\NormalSeqOfU{#1}{#2}{#3}}^{\BoldPsiHat{#2}{#4}}}
+\newcommand\SumPsiHatN[5]{\sum_{\NormalSeqOfN{#1}{#2}{#3}}^{\BoldPsiHat{#5}{#4}}}
+\newcommand\SumPsiHatAst[4]{\sum_{\NormalSeqOfU{#1}{#2}{#3}}^{\BoldPsiHatAst{#2}{#4}}}
+\newcommand\SumPsiSeq[4]{\sum_{\NormalSeqOfU{#1}{#2}{#3}}^{\BoldPsi{#2}{#4}}}
+\newcommand\SumPsiVecAst[4]{\sum_{\NormalSeqOfU{#1}{#2}{#3}}^{\BoldPsiVecAst{#2}{#4}}}
+\newcommand\Therefore{\LogicAlignment{\therefore}}
+\newcommand\ZeroSeq[1]{\PowerBracket{0}{#1}}
+
+\newcommand\BmEnumerate[1]{\bm{$\Enumerate{#1}$} \quad}
+\newcommand\Category[2]{\BmEnumerate{#1} #2 \TextPeriod}
+\newcommand\EqEndComma{\Comma}
+\newcommand\EqEndPeriod{.}
+\newcommand\EqEndSemicolon{;}
+\newcommand\Footnote[1]{\Space{\text{\TextBracket{#1}}}}
+\newcommand\Inference[1]{推论#1}
+\newcommand\NameRef[1]{\Footnote{\nameref{#1}}}
+\newcommand\Proposition[1]{命题#1}
+\newcommand\SubTitle[1]{\textbf{#1} \quad}
+\newcommand\TextBracket[1]{(#1)}
+\newcommand\TextColon{\TextPunctuation{\Colon}}
+\newcommand\TextComma{\TextPunctuation{\Comma}}
+\newcommand\TextPeriod{\TextPunctuation{.}}
+\newcommand\TextPunctuation[1]{\kern -0.3em#1\kern 0.7em}
+\newcommand\TextSemicolon{\TextPunctuation{;}}
+\newcommand\TextStrip[1]{\kern -0.3em#1\kern 0.3em}
+
+\newenvironment{proof}{\SubTitle{证明}}{\par 证毕 \TextPeriod}
+
+
+\geometry{left=0.8cm, right=0.8cm, top=2.0cm, bottom=2.0cm}
+\allowdisplaybreaks[1]
+\title{用初等方法证明代数数域的代数封闭性}
+\author{Michael W}
+\date{2018年10月23日 --- 2018年12月8日}
+
+
+\begin{document}
+	
+	\maketitle
+	
+	\SubTitle{摘要} 通过一个初等的方式 \TextComma 证明了代数数域是代数闭域 \TextPeriod
+	
+	\SubTitle{说明} 本文基于代数基本定理 \TextComma 即 \TextColon 复数域 $\MathSetC$ 是代数闭域 \TextComma 对任意正整数 $n$ \TextComma 任意复系数 $n$ 次多项式函数在复数域 $\MathSetC$ 上有且只有 $n$ 个零点 \TextPeriod
+	
+	\SubTitle{关键词} 初等数学 \TextSemicolon 代数数 \TextSemicolon 代数闭域
+	
+	
+	\section{命题}
+	令 $\InSetU{n}$ \TextComma 对于一个在复数域 $\MathSetC$ 上的 $X$ \TextComma 若存在一个 $n$ 次整系数多项式函数 $f$ 满足
+	\begin{equation*}
+	\Func{f}{x} = \FlatPolynomial \Domain{\Bracket{\ForAll{i}{\InSetN{i} \LogicAnd i \leq n}{\InSetZ{a_{i}}}} \DomainAnd \NeqZero{a_{n}}}
+	\end{equation*}
+	且 $X$ 是 $f$ 的一个零点 \TextComma 则称 $X$ 是一个代数数 \TextPeriod
+	
+	若存在一个 $n$ 次整系数多项式函数 $f$ 使得 $X$ 是它的一个零点 \TextComma 而不存在次数低于 $n$ 的整系数多项式函数 $g$ 使得 $X$ 是它的一个零点 \TextComma 则称 $X$ 为 $n$ 次代数数 \TextPeriod
+	
+	特别地 \TextComma 称 $0$ 为零次代数数 \TextPeriod
+	
+	现将由所有代数数构成的集合记作 $\MathSetA$ \TextPeriod 该集合是复数域 $\MathSetC$ 的一个子集 \TextPeriod
+	
+	\SubTitle{命题} 任意代数数系数多项式函数的零点都是代数数 \TextPeriod
+	
+	即 \TextColon 令 $\InSetU{n}$ \TextComma $\ForAll{i}{\InSetN{i} \LogicAnd i \leq n}{\InSetA{a_{i}}} \CommaAnd \NeqZero{a_{n}}$ \TextComma 代数数系数多项式函数 $f$ 满足
+	\begin{equation*}
+	\Func{f}{x} = \FlatPolynomial \EqEndComma
+	\end{equation*}
+	若 $\MathSetC$ 上的 $X$ 是 $f$ 的一个零点 \TextComma 则 $X$ 为代数数 \TextPeriod
+	
+	
+	\section{预备定义}
+	\subsection{运算推广}
+	为了下文的需要 \TextComma 对一些运算进行推广 \TextColon
+	\begin{align*}
+	& 0^{0} = 1 \EqEndSemicolon \\
+	& \binom{n}{r} =
+	\begin{dcases}
+	\frac{n!}{r!\Bracket{n-r}!} \CaseDomain{\InSetN{n} \DomainAnd \InSetN{r} \DomainAnd n \geq r} \\
+	0 \CaseDomain{\InSetN{n} \DomainAnd \InSetN{r} \DomainAnd n < r}
+	\end{dcases} \EqEndPeriod
+	\end{align*}
+	
+	
+	\subsection{求和与连乘}
+	令 $\Phi$ 为集合 \TextComma $f$ 为函数 \TextComma 本文统一使用以下方式记求和符号和连乘符号 \TextColon
+	\begin{align*}
+	\sum_{i}^{\Phi} \Func{f}{i} & \DefineAs
+	\begin{dcases}
+	\sum_{\InSet{i}{\Phi}} \Func{f}{i} \CaseDomain{\Phi \neq \EmptySet} \\
+	0 \CaseDomain{\Phi = \EmptySet}
+	\end{dcases} \EqEndSemicolon \\
+	\prod_{i}^{\Phi} \Func{f}{i} & \DefineAs
+	\begin{dcases}
+	\prod_{\InSet{i}{\Phi}} \Func{f}{i} \CaseDomain{\Phi \neq \EmptySet} \\
+	1 \CaseDomain{\Phi = \EmptySet}
+	\end{dcases} \EqEndPeriod
+	\end{align*}
+	
+	
+	\subsection{数组定义}
+	定义集合 \TextColon
+	\begin{align*}
+	\BrSetZ{\delta}{\varepsilon} & \DefineAs
+	\begin{dcases}
+	\SetDefinition{i}{\InSetZ{i} \SetDefAnd \delta \leq i \leq \varepsilon} \CaseDomain{\InSetZ{\delta} \DomainAnd \InSetZ{\varepsilon} \DomainAnd \delta \leq \varepsilon} \\
+	\EmptySet \CaseDomain{\InSetZ{\delta} \DomainAnd \InSetZ{\varepsilon} \DomainAnd \delta = \varepsilon+1}
+	\end{dcases} \EqEndSemicolon \\
+	\BrSetN{\varepsilon} & \DefineAs \BrSetZ{0}{\varepsilon} \Domain{\InSetZ{\varepsilon} \DomainAnd \varepsilon \geq -1} \EqEndSemicolon \\
+	\BrSetU{\varepsilon} & \DefineAs \BrSetZ{1}{\varepsilon} \Domain{\InSetN{\varepsilon}} \EqEndPeriod
+	\end{align*}
+	
+	定义 \TextColon
+	\begin{align*}
+	\NormalSeqOfZ{i}{\delta}{\varepsilon}{\xi} & \DefineAs
+	\begin{dcases}
+	\FlatSeqOfXi \CaseDomain{\InSetZ{\delta} \DomainAnd \InSetZ{\varepsilon} \DomainAnd \delta \leq \varepsilon} \\
+	\text{\TextBracket{NULL}} \CaseDomain{\InSetZ{\delta} \DomainAnd \InSetZ{\varepsilon} \DomainAnd \delta = \varepsilon+1}
+	\end{dcases} \EqEndSemicolon \\
+	\NormalSeqOfN{i}{\varepsilon}{\xi} & \DefineAs \NormalSeqOfZ{i}{0}{\varepsilon}{\xi} \Domain{\InSetZ{\varepsilon} \DomainAnd \varepsilon \geq -1} \EqEndSemicolon \\
+	\NormalSeqOfU{i}{\varepsilon}{\xi} & \DefineAs \NormalSeqOfZ{i}{1}{\varepsilon}{\xi} \Domain{\InSetN{\varepsilon}} \EqEndComma
+	\end{align*}
+	其中 $\xi_{i}$ 为代数式或关系式 \TextPeriod 当 $\xi_{i}$ 为代数式时 \TextComma 称其为数组 \TextPeriod 本文中定义的数组是有序的 \TextPeriod
+	
+	
+	\subsection{数组集合与齐次轮换式}
+	定义计数函数 \TextColon
+	\begin{equation*}
+	\Func{\Count \BracketMid{\alpha}}{\SeqXi} = \lambda \Domain{\InSetC{\alpha} \DomainAnd \InSetU{\varphi} \DomainAnd \SeqOfUInSetC{i}{\varphi}{\xi}} \EqEndComma
+	\end{equation*}
+	其中 $\lambda$ 表示 $\SeqXi$ 中 $\alpha$ 的个数 \TextPeriod 显然有 $\InPartialSetN{\lambda}{\varphi}$ \TextPeriod
+	
+	定义 $\varphi$ 项数组的集合以及关于参数 $\NormalSeqOfU{i}{\varphi}{x}$ 的 $\varphi$ 元齐次轮换式 \TextColon
+	\begin{align*}
+	& \left\{ \begin{aligned}
+	\BoldPsiSeq & \DefineAs
+	\begin{dcases}
+	\SetDefinition{\SeqXi}{\ForAll{j}{\InPartialSetN{j}{\eta}}{\Func{\Count \BracketMid{j}}{\SeqXi} = \lambda_{j}}} \CaseDomain{\ForAll{i}{\InPartialSetN{i}{\eta}}{\lambda_{i} \geq 0}} \\
+	\EmptySet \CaseDomain{\Exists{\kappa}{\InPartialSetN{\kappa}{\eta}}{\lambda_{\kappa} < 0}}
+	\end{dcases} \\
+	\BoldOmegaSeq & \DefineAs
+	\begin{dcases}
+	\SumPsiSeq{i}{\varphi}{k}{\SeqLambda} \Bracket{\ProdOfU{j}{\varphi} x_{j}^{k_{j}}} \CaseDomain{\ForAll{i}{\InPartialSetN{i}{\eta}}{\lambda_{i} \geq 0}} \\
+	0 \CaseDomain{\Exists{\kappa}{\InPartialSetN{\kappa}{\eta}}{\lambda_{\kappa} < 0}}
+	\end{dcases} \\
+	\BoldBigOmegaSeq & \DefineAs
+	\begin{dcases}
+	\ProdOfN{j}{\eta} \lambda_{j}! \cdot \BoldOmegaSeq \CaseDomain{\ForAll{i}{\InPartialSetN{i}{\eta}}{\lambda_{i} \geq 0}} \\
+	0 \CaseDomain{\Exists{\kappa}{\InPartialSetN{\kappa}{\eta}}{\lambda_{\kappa} < 0}}
+	\end{dcases}
+	\end{aligned} \right. \DomainComma \\
+	& \InSetU{\varphi} \DomainAnd \InSetN{\eta} \DomainAnd \SeqOfNInSetZ{i}{\eta}{\lambda} \DomainAnd \NormalSumOfN{i}{\eta}{\lambda} = \varphi \EqEndPeriod
+	\end{align*}
+	
+	特别地 \TextComma 当 $\eta = 0$ 时 \TextComma 有 $\lambda_{0} = \varphi \CommaAnd \Abs{\BoldPsi{\varphi}{\ZeroSeq{\varphi}}} = 1 \CommaAnd \BoldOmega{\varphi}{\ZeroSeq{\varphi}} = 1 \CommaAnd \BoldBigOmega{\varphi}{\ZeroSeq{\varphi}} = \varphi!$ \TextPeriod
+	
+	特别地 \TextComma 当 $\eta = 1$ 时 \TextComma 令 $\lambda = \lambda_{1} \CommaAnd \InPartialSetN{\lambda}{\varphi}$ \TextPeriod 当 $\lambda \neq 0$ 时 \TextComma 形如 $\BoldOmegaBase{\varphi}{\lambda}$ 的 $\varphi$ 元齐次轮换式称为 $\varphi$ 元基本轮换式 \TextPeriod $\varphi$ 元基本轮换式共有 $\varphi$ 个 \TextPeriod
+	
+	定义其他 $\varphi$ 项数组的集合 \TextColon
+	\begin{align*}
+	& \left\{ \begin{aligned}
+	\BoldPsiVecAst{\varphi}{\varepsilon} & \DefineAs \SetDefinition{\SeqXi}{\SeqOfUInSetU{i}{\varphi}{\xi} \SetDefAnd \xi_{\varphi} \leq \varepsilon \SetDefAnd \GrowSeq{\varphi}{\xi}} \Domain{\InSetN{\varepsilon} \DomainAnd \varepsilon \geq \varphi} \\
+	\BoldPsiHat{\varphi}{\sigma} & \DefineAs \SetDefinition{\SeqXi}{\SeqOfUInSetN{i}{\varphi}{\xi} \SetDefAnd \NormalSumOfU{i}{\varphi}{\xi} = \sigma} \Domain{\InSetN{\sigma}} \\
+	\BoldPsiHatAst{\varphi}{\sigma} & \DefineAs
+	\begin{dcases}
+	\SetDefinition{\SeqXi}{\SeqOfUInSetU{i}{\varphi}{\xi} \SetDefAnd \NormalSumOfU{i}{\varphi}{\xi} = \sigma} \CaseDomain{\InSetN{\sigma} \DomainAnd \sigma \geq \varphi} \\
+	\EmptySet \CaseDomain{\InSetN{\sigma} \DomainAnd 0 \leq \sigma < \varphi}
+	\end{dcases}
+	\end{aligned} \right. \DomainComma \\
+	& \InSetU{\varphi} \EqEndPeriod
+	\end{align*}
+	
+	
+	\subsection{多项式函数}
+	本文中讨论的多项式函数定义域都为复数域 $\MathSetC$ \TextPeriod
+	
+	令 $\InSetN{n}$ \TextComma 形如
+	\begin{equation*}
+	\Func{f}{x} = \FlatPolynomial = \PolynomialDefault \Domain{\SeqOfNInSetC{i}{n}{a} \DomainAnd \NeqZero{a_{n}}}
+	\end{equation*}
+	的函数 $f$ 称为 $n$ 次多项式函数 \TextPeriod
+	
+	记 $\PolynomialSet{n}$ 为由全体 $n$ 次多项式函数的集合 \TextPeriod 注意零函数不属于 $\PolynomialSet{0}$ \TextPeriod
+	
+	
+	\subsection{有理表示}
+	令 $\Phi$ 为代数式的有限集合 \TextComma $\Gamma$ 为代数式 \TextComma 若 $\Gamma$ 可表示为关于 $\Phi$ 中各元素的有理系数整式 \TextComma 则称 $\Gamma$ 可由 $\Phi$ 的元素有理表示 \TextComma 记为
+	\begin{equation*}
+	\Phi \RationalEx \Gamma \EqEndPeriod
+	\end{equation*}
+	
+	设 $\Abs{\Phi} = \mu \CommaAnd \Phi = \SeqSetU{i}{\mu}{\gamma}$ \TextComma 其中 $\InSetN{\mu}$ \TextComma 则 $\Gamma$ 经过展开后可以得到
+	\begin{equation*}
+	\Gamma = \SumOfU{j}{\nu} \Bracket{\rho_{j} \cdot \ProdOfU{i}{\mu} \gamma_{i}^{\chi_{\MultiSub{i}{j}}}} \Domain{\InSetN{\nu} \DomainAnd \SeqOfUInSetQ{i}{\nu}{\rho} \DomainAnd \SeqOfU{i}{\mu} \SeqOfU{j}{\nu} \Bracket{\InSetN{\chi_{\MultiSub{i}{j}}}}} \EqEndPeriod
+	\end{equation*}
+	
+	特别地 \TextComma 若 $\SubSetQ{\Phi}$ \TextComma 则 $\Gamma$ 为有理常数 \TextPeriod
+	
+	另外 \TextComma 令 $\Upsilon$ 为有限集合 \TextComma 记
+	\begin{equation*}
+	\Phi \RationalEx \Upsilon \Equivalent \ForAll{\Gamma}{\InSet{\Gamma}{\Upsilon}}{\Phi \RationalEx \Gamma} \EqEndComma
+	\end{equation*}
+	称 $\Upsilon$ 的元素可由 $\Phi$ 的元素有理表示 \TextPeriod
+	
+	特别地 \TextComma 若 $\SubSetQ{\Phi}$ \TextComma 则 $\SubSetQ{\Upsilon}$ \TextPeriod
+	
+	特别地 \TextComma 若 $\SubSetQ{\Upsilon}$ \TextComma 则对任意有限集合 $\Phi$ \TextComma 有 $\Phi \RationalEx \Upsilon$ \TextPeriod
+	
+	
+	\section{引理}
+	\subsection{\Proposition{1}} \label{sec:3.1}
+	令 $\Gamma \Appose \gamma$ 为代数式 \TextComma $\Phi \Appose \bar{\Phi}$ 为代数式的有限集合 \TextComma 则 \TextColon
+	\begin{equation*}
+	\bar{\Phi} \RationalEx \gamma \LogicAnd \Phi \cup \Set{\gamma} \RationalEx \Gamma \Implies \Phi \cup \bar{\Phi} \RationalEx \Gamma \EqEndPeriod
+	\end{equation*}
+	
+	\begin{proof}
+		设 $\Abs{\Phi} = \mu \CommaAnd \Phi = \SeqSetU{i}{\mu}{\gamma} \CommaAnd \Abs{\bar{\Phi}} = \bar{\mu} \CommaAnd \bar{\Phi} = \SeqSetU{i}{\bar{\mu}}{\bar{\gamma}}$ \TextComma 其中 $\InSetN{\mu} \CommaAnd \InSetN{\bar{\mu}}$ \TextPeriod 由定义 \TextComma 设
+		\begin{align*}
+		\Gamma & = \SumOfU{j}{\nu} \Bracket{\rho_{j} \cdot \Bracket{\gamma^{\chi_{j}} \cdot \ProdOfU{i}{\mu} \gamma_{i}^{\chi_{\MultiSub{i}{j}}}}} \Domain{\InSetN{\nu} \DomainAnd \SeqOfUInSetQ{i}{\nu}{\rho} \DomainAnd \SeqOfUInSetN{i}{\nu}{\chi} \DomainAnd \SeqOfU{i}{\mu} \SeqOfU{j}{\nu} \Bracket{\InSetN{\chi_{\MultiSub{i}{j}}}}} \EqEndComma \\
+		\gamma & = \SumOfU{j}{\bar{\nu}} \Bracket{\bar{\rho}_{j} \cdot \ProdOfU{i}{\bar{\mu}} \bar{\gamma}_{i}^{\bar{\chi}_{\MultiSub{i}{j}}}} \Domain{\InSetN{\bar{\nu}} \DomainAnd \SeqOfUInSetQ{i}{\bar{\nu}}{\bar{\rho}} \DomainAnd \SeqOfU{i}{\bar{\mu}} \SeqOfU{j}{\bar{\nu}} \Bracket{\InSetN{\bar{\chi}_{\MultiSub{i}{j}}}}} \EqEndPeriod
+		\end{align*}
+		
+		\begin{flalign*}
+		\FlushSpace \Therefore \Gamma = \SumOfU{j}{\nu} \Bracket{\rho_{j} \cdot \Bracket{\gamma^{\chi_{j}} \cdot \ProdOfU{i}{\mu} \gamma_{i}^{\chi_{\MultiSub{i}{j}}}}} & \\
+		& \hphantom{\Gamma} = \SumOfU{j}{\nu} \Bracket{\rho_{j} \cdot \Bracket{\SumOfU{q}{\bar{\nu}} \Bracket{\bar{\rho}_{q} \cdot \ProdOfU{p}{\bar{\mu}} \bar{\gamma}_{p}^{\bar{\chi}_{\MultiSub{p}{q}}}}}^{\chi_{j}} \cdot \ProdOfU{i}{\mu} \gamma_{j}^{\chi_{\MultiSub{i}{j}}}} & \\
+		& \hphantom{\Gamma} = \SumOfU{j}{\nu} \Bracket{\rho_{j} \cdot \SumPsiHat{q}{\bar{\nu}}{r}{\chi_{j}} \Bracket{\chi_{j}! \cdot \Bracket{\ProdOfU{s}{\bar{\nu}} r_{s}!}^{-1} \cdot \ProdOfU{q}{\bar{\nu}} \Bracket{\bar{\rho}_{q} \cdot \ProdOfU{p}{\bar{\mu}} \bar{\gamma}_{p}^{\bar{\chi}_{\MultiSub{p}{q}}}}^{r_{q}}} \cdot \ProdOfU{i}{\mu} \gamma_{i}^{\chi_{\MultiSub{i}{j}}}} & \\
+		& \hphantom{\Gamma} = \SumOfU{j}{\nu} \SumPsiHat{q}{\bar{\nu}}{r}{\chi_{j}} \Bracket{\rho_{j} \cdot \chi_{j}! \cdot \Bracket{\ProdOfU{s}{\bar{\nu}} r_{s}!}^{-1} \cdot \ProdOfU{q}{\bar{\nu}} \Bracket{\bar{\rho}_{q} \cdot \ProdOfU{p}{\bar{\mu}} \bar{\gamma}_{p}^{\bar{\chi}_{\MultiSub{p}{q}}}}^{r_{q}} \cdot \ProdOfU{i}{\mu} \gamma_{i}^{\chi_{\MultiSub{i}{j}}}} & \\
+		& \hphantom{\Gamma} = \SumOfU{j}{\nu} \SumPsiHat{q}{\bar{\nu}}{r}{\chi_{j}} \Bracket{\Bracket{\rho_{j} \cdot \chi_{j}! \cdot \ProdOfU{s}{\bar{\nu}} \frac{\bar{\rho}_{s}^{r_{s}}}{r_{s}!}} \cdot \Bracket{\ProdOfU{q}{\bar{\nu}} \ProdOfU{p}{\bar{\mu}} \bar{\gamma}_{p}^{\bar{\chi}_{\MultiSub{p}{q}} \cdot r_{q}} \cdot \ProdOfU{i}{\mu} \gamma_{i}^{\chi_{\MultiSub{i}{j}}}}} \EqEndComma & \\
+		\Therefore \SeqSetU{i}{\mu}{\gamma} \cup \SeqSetU{i}{\bar{\mu}}{\bar{\gamma}} \RationalEx \Gamma \EqEndPeriod &
+		\end{flalign*}
+	\end{proof}
+	
+	
+	\subsection{\Inference{1}} \label{sec:3.2}
+	令 $\Phi \Appose \bar{\Phi} \Appose \Upsilon \Appose \bar{\Upsilon}$ 为代数式的有限集合 \TextComma 则 \TextColon
+	\begin{equation*}
+	\bar{\Phi} \RationalEx \Phi \LogicAnd \Phi \cup \bar{\Upsilon} \RationalEx \Upsilon \Implies \bar{\Phi} \cup \bar{\Upsilon} \RationalEx \Upsilon \EqEndPeriod
+	\end{equation*}
+	
+	\begin{proof}
+		对 $\Upsilon \Appose \Phi$ 进行分类讨论 \TextPeriod
+		
+		\Category{1}{$\Upsilon = \EmptySet$} 则 $\SubSetQ{\Upsilon}$ \TextComma 可由任意有限集合的元素有理表示 \TextComma 命题成立 \TextPeriod
+		
+		\Category{2}{$\Phi = \EmptySet$} 则显然有 $\bar{\Upsilon} \RationalEx \Upsilon \Implies \bar{\Phi} \cup \bar{\Upsilon} \RationalEx \Upsilon$ \TextComma 命题成立 \TextPeriod
+		
+		\Category{3}{$\Upsilon \neq \EmptySet \LogicAnd \Phi \neq \EmptySet$} 设 $\Gamma$ 为 $\Upsilon$ 中的任意元素 \TextComma 设 $\Abs{\Phi} = \mu \CommaAnd \Phi = \SeqSetU{i}{\mu}{\gamma}$ \TextComma 其中 $\InSetU{\mu}$ \TextPeriod
+		\begin{flalign*}
+		\FlushSpace \Because \bar{\Phi} \RationalEx \gamma_{1} \LogicAnd \Bracket{\SeqSetZ{i}{2}{\mu}{\gamma} \cup \bar{\Upsilon}} \cup \Set{\gamma_{1}} \RationalEx \Gamma \EqEndComma & \\
+		\Therefore \NameRef{sec:3.1} \SeqSetZ{i}{2}{\mu}{\gamma} \cup \bar{\Phi} \cup \bar{\Upsilon} \RationalEx \Gamma \EqEndPeriod &
+		\end{flalign*}
+		
+		对 $\InPartialSetZ{k}{2}{\mu}$ 进行归纳 \TextPeriod
+		
+		假设已得到
+		\begin{equation*}
+		\SeqSetZ{i}{k}{\mu}{\gamma} \cup \bar{\Phi} \cup \bar{\Upsilon} \RationalEx \Gamma \EqEndPeriod
+		\end{equation*}
+		
+		\begin{flalign*}
+		\FlushSpace \Because \bar{\Phi} \RationalEx \gamma_{k} \LogicAnd \Bracket{\SeqSetZ{i}{k+1}{\mu}{\gamma} \cup \bar{\Phi} \cup \bar{\Upsilon}} \cup \Set{\gamma_{k}} \RationalEx \Gamma \EqEndComma & \\
+		\Therefore \NameRef{sec:3.1} \SeqSetZ{i}{k+1}{\mu}{\gamma} \cup \bar{\Phi} \cup \bar{\Upsilon} \RationalEx \Gamma \EqEndPeriod &
+		\end{flalign*}
+		
+		经过归纳可得到
+		\begin{equation*}
+		\bar{\Phi} \cup \bar{\Upsilon} \RationalEx \Gamma \EqEndPeriod
+		\end{equation*}
+	\end{proof}
+	
+	
+	\subsection{\Proposition{2}} \label{sec:3.3}
+	令 $\InSetU{n} \CommaAnd \InPolynomialSet{f}{n} \CommaAnd \Func{f}{x} = \PolynomialDefault$ \TextPeriod 设 $f$ 的 $n$ 个零点为 $\NormalSeqOfU{i}{n}{x}$ \TextComma 则有下列根与系数关系 \TextBracket{Vieta定理} \TextColon
+	\begin{equation*}
+	\ForAll{k}{\InPartialSetU{k}{n}}{\SumPsiVecAst{r}{k}{p}{n} \Bracket{\ProdOfU{r}{k} x_{p_{r}}} = \Bracket{-1}^{k} \cdot \frac{a_{n-k}}{a_{n}}} \EqEndPeriod
+	\end{equation*}
+	
+	\begin{proof}
+		将 $x$ 视作参数 \TextComma 则
+		\begin{flalign*}
+		\FlushSpace 0 & = a_{n} \cdot \ProdOfU{i}{n} \Bracket{x-x_{i}} - \PolynomialDefault & \\
+		& = a_{n} \cdot \Bracket{x^{n} + \SumOfU{k}{n} \Bracket{x^{n-k} \cdot \Bracket{-1}^{k} \cdot \SumPsiVecAst{r}{k}{p}{n} \Bracket{\ProdOfU{r}{k} x_{p_{r}}}}} - \Bracket{a_{n} \cdot x^{n} + \SumOfU{k}{n} \Bracket{a_{n-k} \cdot x^{n-k}}} & \\
+		& = \SumOfU{k}{n} \Bracket{x^{n-k} \cdot \Bracket{\Bracket{-1}^{k} \cdot a_{n} \cdot \SumPsiVecAst{r}{k}{p}{n} \Bracket{\ProdOfU{r}{k} x_{p_{r}}} -a_{n-k}}} \EqEndPeriod &
+		\end{flalign*}
+		
+		\begin{flalign*}
+		\FlushSpace \Therefore \ForAll{k}{\InPartialSetU{k}{n}}{\Bracket{-1}^{k} \cdot a_{n} \cdot \SumPsiVecAst{r}{k}{p}{n} \Bracket{\ProdOfU{r}{k} x_{p_{r}}} - a_{n-k} = 0} \EqEndPeriod & \\
+		\Therefore \ForAll{k}{\InPartialSetU{k}{n}}{\SumPsiVecAst{r}{k}{p}{n} \Bracket{\ProdOfU{r}{k} x_{p_{r}}} = \BoldOmegaBase{n}{k} = \Bracket{-1}^{k} \cdot \frac{a_{n-k}}{a_{n}}} \EqEndPeriod &
+		\end{flalign*}
+	\end{proof}
+	
+	
+	\subsection{\Proposition{3}} \label{sec:3.4}
+	令 $\InSetU{n}$ \TextComma 任意的 $n$ 元齐次轮换式都可由 $n$ 个 $n$ 元基本轮换式有理表示 \TextPeriod 即 \TextColon
+	\begin{equation*}
+	\ForAll{n}{\InSetU{n}}{\SetDefinition{\BoldOmegaBase{n}{k}}{\InPartialSetU{k}{n}} \RationalEx \SetDefinition{\BoldOmega{n}{\NumbersSeqV{t}}}{\InSetN{t} \SetDefAnd \SeqOfNInSetN{i}{t}{v} \SetDefAnd \NormalSumOfN{i}{t}{v} = n}} \EqEndPeriod
+	\end{equation*}
+	
+	\begin{proof}
+		\begin{flalign*}
+		\FlushSpace \Because \SeqOfNInSetN{i}{t}{v} \LogicAnd \NormalSumOfN{i}{t}{v} = n > 0 \EqEndComma & \\
+		\Therefore \Exists{k}{\InPartialSetN{k}{t}}{\NeqZero{v_{k}}} \EqEndPeriod &
+		\end{flalign*}
+		
+		不妨令 $\NeqZero{v_{t}}$ \TextPeriod 对 $t$ 进行分类讨论 \TextPeriod
+		
+		\Category{1}{$t = 0$} 则 $v_{0} = n \CommaAnd \BoldOmega{n}{\NumbersSeqV{t}} = \BoldOmega{n}{\ZeroSeq{n}} = 1$ \TextComma 可由任意有限集合的元素有理表示 \TextComma 命题成立 \TextPeriod
+		
+		\Category{2}{$t = 1$} 令 $v = v_{1} \CommaAnd \InPartialSetU{v}{n}$ \TextComma 显然有
+		\begin{equation*}
+		\SetDefinition{\BoldOmegaBase{n}{k}}{\InPartialSetU{k}{n}} \RationalEx \SetDefinition{\BoldOmegaBase{n}{v}}{\InPartialSetU{v}{n}} \EqEndPeriod
+		\end{equation*}
+		
+		\Category{3}{$\InSetU{t} \LogicAnd t \geq 2$} 设 $\InPartialSetU{\bar{q}}{n} \CommaAnd \InSetN{\bar{t}} \CommaAnd \NormalSumOfN{i}{\bar{t}}{\bar{v}} = n$ \TextPeriod
+		
+		考察 $n$ 元齐次轮换式 $\BoldBigOmega{n}{\NumbersSeqVBar{\bar{t}}}$ 与 $n$ 元基本轮换式 $\BoldOmegaBase{n}{\bar{q}}$ 的乘积 \TextColon
+		\begin{flalign*}
+		& \BoldBigOmega{n}{\NumbersSeqVBar{\bar{t}}} \cdot \BoldOmegaBase{n}{\bar{q}} & \\
+		\FlushSpace \ProgressEq \SumPsiHatN{i}{\bar{t}}{u}{\bar{q}}{\bar{t}+1} \Bracket{ \ProdOfN{j}{\bar{t}} \binom{\bar{v}_{j}}{u_{j}} \cdot \BoldBigOmega{n}{\PowerBracket{0}{\bar{v}_{0}-u_{0}} \SeqComma \SeqOfU{i}{\bar{t}} \PowerBracket{i}{\bar{v}_{i}+u_{i-1}-u_{i}} \SeqComma \PowerBracket{\Bracket{\bar{t}+1}}{u_{\bar{t}}}}} & \\
+		\ProgressEq \binom{\bar{v}_{\bar{t}}}{\bar{q}} \cdot \BoldBigOmega{n}{\NumbersSeqVBar{\bar{t}-1} \SeqComma \PowerBracket{\bar{t}}{\bar{v}_{\bar{t}}-\bar{q}} \SeqComma \PowerBracket{\Bracket{\bar{t}+1}}{\bar{q}}} & \\
+		& + \SumOfN{r}{\bar{q}-1} \SumPsiHatN{i}{\bar{t}-1}{u}{\bar{q}-r}{\bar{t}} \Bracket{\ProdOfN{j}{\bar{t}-1} \binom{\bar{v}_{j}}{u_{j}} \cdot \binom{\bar{v}_{\bar{t}}}{r} \cdot \BoldBigOmega{n}{\PowerBracket{0}{\bar{v}_{0}-u_{0}} \SeqComma \SeqOfU{i}{\bar{t}-1} \PowerBracket{i}{\bar{v}_{i}+u_{i-1}-u_{i}} \SeqComma \PowerBracket{\bar{t}}{\bar{v}_{\bar{t}}+u_{\bar{t}-1}-r} \SeqComma \PowerBracket{\Bracket{\bar{t}+1}}{r}}} \EqEndPeriod &
+		\end{flalign*}
+		
+		取 $\bar{t} = t-1$ \TextComma 得到
+		\begin{flalign*}
+		& \BoldBigOmega{n}{\NumbersSeqVBar{t-1}} \cdot \BoldOmegaBase{n}{\bar{q}} & \\
+		\FlushSpace \ProgressEq \binom{\bar{v}_{t-1}}{\bar{q}} \cdot \BoldBigOmega{n}{\NumbersSeqVBar{t-2} \SeqComma \PowerBracket{\Bracket{t-1}}{\bar{v}_{t-1}-\bar{q}} \SeqComma \PowerBracket{t}{\bar{q}}} & \\
+		& + \SumOfN{r}{\bar{q}-1} \SumPsiHatN{i}{t-2}{u}{\bar{q}-r}{t-1} \Bracket{\ProdOfN{j}{t-2} \binom{\bar{v}_{j}}{u_{j}} \cdot \binom{\bar{v}_{t-1}}{r} \cdot \BoldBigOmega{n}{\PowerBracket{0}{\bar{v}_{0}-u_{0}} \SeqComma \SeqOfU{i}{t-2} \PowerBracket{i}{\bar{v}_{i}+u_{i-1}-u_{i}} \SeqComma \PowerBracket{\Bracket{t-1}}{\bar{v}_{t-1}+u_{t-2}-r} \SeqComma \PowerBracket{t}{r}}} \EqEndPeriod &
+		\end{flalign*}
+		
+		取 $\SeqOfN{i}{t-2} \Bracket{\bar{v}_{i} = v_{i}} \CommaAnd \bar{v}_{t-1} = v_{t-1}+v_{t} \CommaAnd \bar{q} = v_{t}$ \TextComma 得到
+		\begin{flalign*}
+		& \BoldBigOmega{n}{\NumbersSeqV{t-1}} \cdot \BoldOmegaBase{n}{v_{t}} & \\
+		\FlushSpace \ProgressEq \binom{v_{t-1}+v_{t}}{v_{t}} \cdot \BoldBigOmega{n}{\NumbersSeqV{t}} & \\
+		& + \SumOfN{r}{v_{t}-1} \SumPsiHatN{i}{t-2}{u}{v_{t}-r}{t-1} \Bracket{\ProdOfN{j}{t-2} \binom{v_{j}}{u_{j}} \cdot \binom{v_{t-1}+v_{t}}{r} \cdot \BoldBigOmega{n}{\PowerBracket{0}{v_{0}-u_{0}} \SeqComma \SeqOfU{i}{t-2} \PowerBracket{i}{v_{i}+u_{i-1}-u_{i}} \SeqComma \PowerBracket{\Bracket{t-1}}{v_{t-1}+v_{t}+u_{t-2}-r} \SeqComma \PowerBracket{t}{r}}} \EqEndPeriod &
+		\end{flalign*}
+		
+		\begin{flalign*}
+		\Therefore \BoldBigOmega{n}{\NumbersSeqV{t}} & \\
+		\FlushSpace \ProgressEq \Bracket{\binom{v_{t-1}+v_{t}}{v_{t}}}^{-1} \cdot \left( \BigEmptyStuff \BoldBigOmega{n}{\NumbersSeqV{t-1}} \cdot \BoldOmegaBase{n}{v_{t}} \right. & \\
+		& \left. - \SumOfN{r}{v_{t}-1} \SumPsiHatN{i}{t-2}{u}{v_{t}-r}{t-1} \Bracket{\ProdOfN{j}{t-2} \binom{v_{j}}{u_{j}} \cdot \binom{v_{t-1}+v_{t}}{r} \cdot \BoldBigOmega{n}{\PowerBracket{0}{v_{0}-u_{0}} \SeqComma \SeqOfU{i}{t-2} \PowerBracket{i}{v_{i}+u_{i-1}-u_{i}} \SeqComma \PowerBracket{\Bracket{t-1}}{v_{t-1}+v_{t}+u_{t-2}-r} \SeqComma \PowerBracket{t}{r}}} \right) \EqEndPeriod &
+		\end{flalign*}
+		
+		于是 \TextComma 我们可以通过有限次迭代的方式得到
+		\begin{align*}
+		& \SetDefinition{\BoldOmegaBase{n}{k}}{\InPartialSetU{k}{n}} \cup \SetDefinition{\BoldBigOmegaBase{n}{k}}{\InPartialSetU{k}{n}} \\
+		\RationalEx & \SetDefinition{\BoldBigOmega{n}{\NumbersSeqV{t}}}{\InSetU{t} \SetDefAnd t \geq 2 \SetDefAnd \SeqOfNInSetN{i}{t}{v} \SetDefAnd \NeqZero{v_{t}} \SetDefAnd \NormalSumOfN{i}{t}{v} = n} \EqEndPeriod
+		\end{align*}
+		
+		\begin{flalign*}
+		\FlushSpace \Because \BoldBigOmega{n}{\NumbersSeqV{t}} = \ProdOfN{i}{t} v_{i}! \cdot \BoldOmega{n}{\NumbersSeqV{t}} \EqEndComma & \\
+		\Therefore \SetDefinition{\BoldOmegaBase{n}{k}}{\InPartialSetU{k}{n}} \RationalEx \SetDefinition{\BoldOmega{n}{\NumbersSeqV{t}}}{\InSetU{t} \SetDefAnd t \geq 2 \SetDefAnd \SeqOfNInSetN{i}{t}{v} \SetDefAnd \NeqZero{v_{t}} \SetDefAnd \NormalSumOfN{i}{t}{v} = n} \EqEndPeriod &
+		\end{flalign*}
+	\end{proof}
+	
+	
+	\subsection{\Proposition{4}} \label{sec:3.5}
+	令 $\InSetU{m} \CommaAnd \InSetU{n} \CommaAnd \InPartialSetU{k}{m} \CommaAnd \InPolynomialSet{f}{n}$ \TextComma $\SumPsiVecAst{r}{k}{p}{m} \Bracket{\ProdOfU{r}{k} \Func{f}{x_{p_{r}}}}$ 可由 $f$ 的各项系数以及 $m$ 元齐次轮换式有理表示 \TextPeriod 即 \TextColon
+	\begin{align*}
+	& \ForAll{m \Appose n \Appose f}{\InSetU{m} \LogicAnd \InSetU{n} \LogicAnd \InPolynomialSet{f}{n}}{\Func{f}{x} = \PolynomialDefault \LogicAnd \\
+		& \SeqSetNA \cup \SetDefinition{\BoldOmega{m}{\NumbersSeqV{t}}}{\InSetN{t} \SetDefAnd \SeqOfNInSetN{i}{t}{v} \SetDefAnd \NormalSumOfN{i}{t}{v} = m} \RationalEx \SetDefinition{\SumPsiVecAst{r}{k}{p}{m} \Bracket{\ProdOfU{r}{k} \Func{f}{x_{p_{r}}}}}{\InPartialSetU{k}{m}}
+	} \EqEndComma
+	\end{align*}
+	其中 $\NormalSeqOfU{i}{m}{x}$ 为参数 \TextPeriod
+	
+	\begin{proof}
+		\begin{flalign*}
+		& \SumPsiVecAst{r}{k}{p}{m} \Bracket{\ProdOfU{r}{k} \Func{f}{x_{p_{r}}}} & \\
+		\FlushSpace \ProgressEq \SumPsiVecAst{r}{k}{p}{m} \Bracket{\ProdOfU{r}{k} \Bracket{\SumOfN{i}{n} \Bracket{a_{i} \cdot x_{p_{r}}^{i}}}} & \\
+		\ProgressEq \SumPsiVecAst{r}{k}{p}{m} \SumPsiHatN{w}{n}{v}{k}{n+1} \Bracket{\ProdOfN{w}{n} a_{w}^{v_{w}} \cdot \SumPsiSeq{r}{k}{q}{\SeqOfN{i}{n} \PowerBracket{i}{v_{i}}} \Bracket{\ProdOfU{r}{k} x_{p_{r}}^{q_{r}}}} & \\
+		\ProgressEq \SumPsiHatN{w}{n}{v}{k}{n+1} \Bracket{\ProdOfN{w}{n} a_{w}^{v_{w}} \cdot \SumPsiVecAst{r}{k}{p}{m} \SumPsiSeq{r}{k}{q}{\SeqOfN{i}{n} \PowerBracket{i}{v_{i}}} \Bracket{\ProdOfU{r}{k} x_{p_{r}}^{q_{r}}}} & \\
+		\ProgressEq \SumPsiHatN{w}{n}{v}{k}{n+1} \Bracket{\binom{m-k+v_{0}}{v_{0}} \cdot \ProdOfN{w}{n} a_{w}^{v_{w}} \cdot \SumPsiSeq{r}{m}{q}{\PowerBracket{0}{m-k+v_{0}} \SeqComma \SeqOfU{i}{n} \PowerBracket{i}{v_{i}}} \Bracket{\ProdOfU{r}{m} x_{r}^{q_{r}}}} & \\
+		\ProgressEq \SumPsiHatN{w}{n}{v}{k}{n+1} \Bracket{\binom{m-k+v_{0}}{v_{0}} \cdot \ProdOfN{w}{n} a_{w}^{v_{w}} \cdot \BoldOmega{m}{\PowerBracket{0}{m-k+v_{0}} \SeqComma \SeqOfU{i}{n} \PowerBracket{i}{v_{i}}}} \EqEndPeriod &
+		\end{flalign*}
+	\end{proof}
+	
+	
+	\subsection{\Inference{2}} \label{sec:3.6}
+	令 $\InSetU{m} \CommaAnd \InSetU{n} \CommaAnd \InPartialSetU{k}{m} \CommaAnd \InPolynomialSet{f}{n}$ \TextComma $\SumPsiVecAst{r}{k}{p}{m} \Bracket{\ProdOfU{r}{k} \Func{f}{x_{p_{r}}}}$ 可由 $f$ 的各项系数以及 $m$ 元基本轮换式有理表示 \TextPeriod 即 \TextColon
+	\begin{align*}
+	& \ForAll{m \Appose n \Appose f}{\InSetU{m} \LogicAnd \InSetU{n} \LogicAnd \InPolynomialSet{f}{n}}{\\
+		& \Func{f}{x} = \PolynomialDefault \LogicAnd \SeqSetNA \cup \SetDefinition{\BoldOmegaBase{m}{k}}{\InPartialSetU{k}{m}} \RationalEx \SetDefinition{\SumPsiVecAst{r}{k}{p}{m} \Bracket{\ProdOfU{r}{k} \Func{f}{x_{p_{r}}}}}{\InPartialSetU{k}{m}}
+	} \EqEndComma
+	\end{align*}
+	其中 $\NormalSeqOfU{i}{m}{x}$ 为参数 \TextPeriod
+	
+	\begin{proof}
+		\begin{flalign*}
+		\FlushSpace \Because \NameRef{sec:3.4} \SetDefinition{\BoldOmegaBase{m}{k}}{\InPartialSetU{k}{m}} \RationalEx \SetDefinition{\BoldOmega{m}{\NumbersSeqV{t}}}{\InSetN{t} \SetDefAnd \SeqOfNInSetN{i}{t}{v} \SetDefAnd \NormalSumOfN{i}{t}{v} = m} \EqEndComma & \\
+		\Because \NameRef{sec:3.5} & \\
+		& \SeqSetNA \cup \SetDefinition{\BoldOmega{m}{\NumbersSeqV{t}}}{\InSetN{t} \SetDefAnd \SeqOfNInSetN{i}{t}{v} \SetDefAnd \NormalSumOfN{i}{t}{v} = m} \RationalEx \SetDefinition{\SumPsiVecAst{r}{k}{p}{m} \Bracket{\ProdOfU{r}{k} \Func{f}{x_{p_{r}}}}}{\InPartialSetU{k}{m}} \EqEndComma & \\
+		\Therefore \NameRef{sec:3.2} \SeqSetNA \cup \SetDefinition{\BoldOmegaBase{m}{k}}{\InPartialSetU{k}{m}} \RationalEx \SetDefinition{\SumPsiVecAst{r}{k}{p}{m} \Bracket{\ProdOfU{r}{k} \Func{f}{x_{p_{r}}}}}{\InPartialSetU{k}{m}} \EqEndPeriod &
+		\end{flalign*}
+	\end{proof}
+	
+	
+	\subsection{\Inference{3}} \label{sec:3.7}
+	令 $\InSetU{m} \CommaAnd \InSetU{n} \CommaAnd \InPolynomialSet{f}{n} \CommaAnd \InPolynomialSet{g}{m}$ \TextComma 必然存在 $n$ 次多项式函数 $h$ 使得 \TextColon 若 $X$ 是 $f$ 的一个零点 \TextComma 则 $\Func{g}{X}$ 是 $h$ 的一个零点 \TextComma 且 $h$ 的各项系数可由 $f$ 的首项系数的倒数 \TextComma $f$ 的非首项系数与 $g$ 的各项系数有理表示 \TextPeriod 即 \TextColon
+	\begin{align*}
+	& \ForAll{m \Appose n \Appose f \Appose g}{\InSetU{m} \LogicAnd \InSetU{n} \LogicAnd \InPolynomialSet{f}{n} \LogicAnd \InPolynomialSet{g}{m}}{\Func{f}{x} = \PolynomialDefault \LogicAnd \Func{g}{x} = \Polynomial{m}{b} \LogicAnd \\
+		& \Bracket{\Exists{h}{\InPolynomialSet{h}{n}}{\Func{h}{x} = \Polynomial{n}{c} \LogicAnd \Bracket{\Func{f}{X} = 0 \Implies \Func{h}{\Func{g}{X}} = 0} \LogicAnd \SeqSetNASp \cup \SeqSetNB \RationalEx \SeqSetNC}}
+	} \TextPeriod
+	\end{align*}
+	
+	\begin{proof}
+		设 $f$ 的 $n$ 个零点为 $\NormalSeqOfU{i}{n}{x}$ \TextPeriod 不妨令 $c_{n} = 1$ \TextPeriod
+		\begin{flalign*}
+		\FlushSpace \Because \ForAll{i}{\InPartialSetU{i}{n}}{\Func{f}{x_{i}} = 0} \EqEndComma & \\
+		\Therefore \NameRef{sec:3.3} \ForAll{k}{\InPartialSetU{k}{n}}{\SumPsiVecAst{r}{k}{p}{n} \Bracket{\ProdOfU{r}{k} x_{p_{r}}} = \BoldOmegaBase{n}{k} = \Bracket{-1}^{k} \cdot \frac{a_{n-k}}{a_{n}}} \EqEndComma & \\
+		\Therefore \SeqSetNASp \RationalEx \SetDefinition{\BoldOmegaBase{n}{k}}{\InPartialSetU{k}{n}} \EqEndPeriod & \\
+		\Because \ForAll{i}{\InPartialSetU{i}{n}}{\Func{h}{\Func{g}{x_{i}}} = 0} \EqEndComma & \\
+		\Therefore \NameRef{sec:3.3} \ForAll{k}{\InPartialSetU{k}{n}}{\SumPsiVecAst{r}{k}{p}{n} \Bracket{\ProdOfU{r}{k} \Func{g}{x_{p_{r}}}} = \Bracket{-1}^{k} \cdot \frac{c_{n-k}}{c_{n}}} \EqEndPeriod & \\
+		\Because c_{n} = 1 \EqEndComma & \\
+		\Therefore \SetDefinition{\SumPsiVecAst{r}{k}{p}{n} \Bracket{\ProdOfU{r}{k} \Func{g}{x_{p_{r}}}}}{\InPartialSetU{k}{n}} \RationalEx \SeqSetNC \EqEndPeriod & \\
+		\Because \NameRef{sec:3.6} \SeqSetNB \cup \SetDefinition{\BoldOmegaBase{n}{k}}{\InPartialSetU{k}{n}} \RationalEx \SetDefinition{\SumPsiVecAst{r}{k}{p}{n} \Bracket{\ProdOfU{r}{k} \Func{g}{x_{p_{r}}}}}{\InPartialSetU{k}{n}} \EqEndComma & \\
+		\Therefore \NameRef{sec:3.2} \SeqSetNASp \cup \SeqSetNB \RationalEx \SeqSetNC \EqEndPeriod &
+		\end{flalign*}
+	\end{proof}
+	
+	
+	\section{命题证明}
+	令 $\InSetU{n}$ \TextComma 记代数数系数多项式函数 $f$ 为 \TextColon
+	\begin{equation*}
+	\Func{f}{x} = \PolynomialDefault \Domain{\SeqOfNInSetA{i}{n}{a} \DomainAnd \NeqZero{a_{n}}} \EqEndPeriod
+	\end{equation*}
+	设 $f$ 的一个零点为 $X$ \TextComma 即 $\Func{f}{X} = 0$ \TextPeriod
+	
+	证明 \TextColon $\InSetA{X}$ \TextPeriod
+	
+	\begin{proof}
+		根据代数数的定义 \TextComma $f$ 的各项系数分别为一个整系数多项式函数的零点 \TextPeriod
+		
+		对满足 $\InPartialSetN{k}{n}$ 的 $a_{k}$ 进行分类讨论 \TextPeriod
+		
+		\Category{1}{$a_{k} = 0$} 令 $n_{k} = 1 \CommaAnd \InPolynomialSet{f_{k}}{1} \CommaAnd \Func{f_{k}}{x} = x$ \TextComma 满足 $\Func{f_{k}}{a_{k}} = 0$ \TextPeriod
+		
+		\Category{2}{$\NeqZero{a_{k}}$} 设 $a_{k}$ 为 $n_{k}$ 次代数数 \TextBracket{$\InSetU{n_{k}}$} \TextComma 整系数多项式函数 $\InPolynomialSet{f_{k}}{n_{k}}$ 满足 $\Func{f_{k}}{a_{k}} = 0$ \TextPeriod
+		
+		记之如下 \TextColon
+		\begin{align*}
+		\Func{f_{k}}{x} = \PolynomialA{k} \Domain{\SeqOfUInSetU{k}{n}{n} \DomainAnd \SeqOfN{k}{n} \SeqOfN{i}{n_{k}} \Bracket{\InSetZ{a_{\MultiSub{k}{i}}}} \DomainAnd \NeqZero{a_{\MultiSub{k}{n_{k}}}}} \EqEndPeriod
+		\end{align*}
+		
+		即证 \TextColon 存在一个整系数多项式函数 $F$ 使得 $X$ 是 $F$ 的一个零点 \TextPeriod 即 \TextColon
+		\begin{equation*}
+		\Exists{N \Appose F}{\InSetU{N} \LogicAnd \InPolynomialSet{F}{N}}{\Func{F}{x} = \Polynomial{N}{A} \LogicAnd \Func{F}{X} = 0 \LogicAnd \SeqOfNInSetZ{i}{N}{A}} \EqEndPeriod
+		\end{equation*}
+		
+		即证 \TextColon 存在一个有理系数多项式函数 $F$ 使得 $X$ 是 $F$ 的一个零点 \TextPeriod 即 \TextColon
+		\begin{equation*}
+		\Exists{N \Appose F}{\InSetU{N} \LogicAnd \InPolynomialSet{F}{N}}{\Func{F}{x} = \Polynomial{N}{A} \LogicAnd \Func{F}{X} = 0 \LogicAnd \SeqOfNInSetQ{i}{N}{A}} \EqEndPeriod
+		\end{equation*}
+		
+		\begin{flalign*}
+		\FlushSpace \Because \InSet{a_{0}}{\SeqSetNA} \EqEndComma & \\
+		\Therefore \Exists{m_{0} \Appose g_{0}}{\InSetU{m_{0}} \LogicAnd \InPolynomialSet{g_{0}}{m_{0}}}{& \\
+			& \Func{g_{0}}{x} = \PolynomialB{0} \LogicAnd \Func{g_{0}}{a_{0}} \equiv \Func{f}{X} \LogicAnd \SeqSetU{i}{n}{a} \cup \Set{X} \RationalEx \SeqSetNSubB{0}
+		} \EqEndPeriod & \\
+		\Because \Func{f_{0}}{a_{0}} = 0 \LogicAnd \InPolynomialSet{g_{0}}{m_{0}} \EqEndComma & \\
+		\Therefore \NameRef{sec:3.7} \Exists{h_{0}}{\InPolynomialSet{h_{0}}{n_{0}}}{& \\
+			& \Func{h_{0}}{x} = \PolynomialC{0} \LogicAnd \Func{h_{0}}{\Func{g_{0}}{a_{0}}} = 0 \LogicAnd \SeqSetNSubASp{0} \cup \SeqSetNSubB{0} \RationalEx \SeqSetNSubC{0}
+		} \EqEndComma & \\
+		\Therefore \NameRef{sec:3.2} \SeqSetNSubASp{0} \cup \SeqSetU{i}{n}{a} \cup \Set{X} \RationalEx \SeqSetNSubC{0} \EqEndPeriod & \\
+		\Because \Func{g_{0}}{a_{0}} \equiv \Func{f}{X} = 0 \EqEndComma & \\
+		\Therefore \Func{h_{0}}{\Func{g_{0}}{a_{0}}} = \Func{h_{0}}{0} = 0 \EqEndComma & \\
+		\Therefore \Func{h_{0}}{x} = \PolynomialC{0} \LogicAnd \Func{h_{0}}{0} = 0 \LogicAnd \SeqSetNSubASp{0} \cup \SeqSetU{i}{n}{a} \cup \Set{X} \RationalEx \SeqSetNSubC{0} \EqEndPeriod &
+		\end{flalign*}
+		
+		对 $\InPartialSetU{k}{n}$ 进行归纳 \TextPeriod
+		
+		假设已得到
+		\begin{align*}
+		& \Exists{h_{k-1}}{\InPolynomialSet{h_{k-1}}{n_{k-1}}}{\\
+			& \Func{h_{k-1}}{x} = \PolynomialC{k-1} \LogicAnd \Func{h_{k-1}}{0} = 0 \LogicAnd \SeqSetNSubASpMulti{k-1} \cup \SeqSetZ{i}{k}{n}{a} \cup \Set{X} \RationalEx \SeqSetNSubC{k-1}
+		} \EqEndPeriod
+		\end{align*}
+		
+		\begin{flalign*}
+		\FlushSpace \Because \InSet{a_{k}}{\SeqSetNSubASpMulti{k-1} \cup \SeqSetZ{i}{k}{n}{a} \cup \Set{X}} \EqEndComma & \\
+		\Therefore \Exists{m_{k} \Appose g_{k}}{\InSetU{m_{k}} \LogicAnd \InPolynomialSet{g_{k}}{m_{k}}}{& \\
+			& \Func{g_{k}}{x} = \PolynomialB{k} \LogicAnd \Func{g_{k}}{a_{k}} \equiv \Func{h_{k-1}}{0} \LogicAnd \SeqSetNSubASpMulti{k-1} \cup \SeqSetZ{i}{k+1}{n}{a} \cup \Set{X} \RationalEx \SeqSetNSubB{k}
+		} \EqEndPeriod & \\
+		\Because \Func{f_{k}}{a_{k}} = 0 \LogicAnd \InPolynomialSet{g_{k}}{m_{k}} \EqEndComma & \\
+		\Therefore \NameRef{sec:3.7} \Exists{h_{k}}{\InPolynomialSet{h_{k}}{n_{k}}}{& \\
+			& \Func{h_{k}}{x} = \PolynomialC{k} \LogicAnd \Func{h_{k}}{\Func{g_{k}}{a_{k}}} = 0 \LogicAnd \SeqSetNSubASp{k} \cup \SeqSetNSubB{k} \RationalEx \SeqSetNSubC{k}
+		} \EqEndComma & \\
+		\Therefore \NameRef{sec:3.2} \SeqSetNSubASpMulti{k} \cup \SeqSetZ{i}{k+1}{n}{a} \cup \Set{X} \RationalEx \SeqSetNSubC{k} \EqEndPeriod & \\
+		\Because \Func{g_{k}}{a_{k}} \equiv \Func{h_{k-1}}{0} = 0 \EqEndComma & \\
+		\Therefore \Func{h_{k}}{\Func{g_{k}}{a_{k}}} = \Func{h_{k}}{0} = 0 \EqEndComma & \\
+		\Therefore \Func{h_{k}}{x} = \PolynomialC{k} \LogicAnd \Func{h_{k}}{0} = 0 \LogicAnd \SeqSetNSubASpMulti{k} \cup \SeqSetZ{i}{k+1}{n}{a} \cup \Set{X} \RationalEx \SeqSetNSubC{k} \EqEndPeriod &
+		\end{flalign*}
+		
+		经过归纳可得到
+		\begin{align*}
+		& \Exists{h_{n}}{\InPolynomialSet{h_{n}}{n_{n}}}{\\
+			& \Func{h_{n}}{x} = \PolynomialC{n} \LogicAnd \Func{h_{n}}{0} = 0 \LogicAnd \SeqSetNSubASpMulti{n} \cup \Set{X} \RationalEx \SeqSetNSubC{n}
+		} \EqEndPeriod
+		\end{align*}
+		
+		\begin{flalign*}
+		\FlushSpace \Because \InSet{X}{\SeqSetNSubASpMulti{n} \cup \Set{X}} \EqEndComma & \\
+		\Therefore \Exists{N \Appose F}{\InSetU{N} \LogicAnd \InPolynomialSet{F}{N}}{& \\
+			& \Func{F}{x} = \Polynomial{N}{A} \LogicAnd \Func{F}{X} \equiv \Func{h_{n}}{0} \LogicAnd \SeqSetNSubASpMulti{n} \RationalEx \SeqSetN{i}{N}{A}
+		} \EqEndPeriod & \\
+		\Because \ForAll{i \Appose j}{\InPartialSetN{j}{n} \LogicAnd \InPartialSetN{i}{n_{j}}}{\InSetZ{a_{\MultiSub{j}{i}}}} \EqEndComma & \\
+		\Therefore \SubSetQ{\SeqSetNSubASpMulti{n}} \EqEndComma & \\
+		\Therefore \SubSetQ{\SeqSetN{i}{N}{A}} \EqEndComma & \\
+		\Therefore \SeqOfNInSetQ{i}{N}{A} \EqEndPeriod & \\
+		\Because \Func{h_{n}}{0} = 0 \EqEndComma & \\
+		\Therefore \Func{F}{X} = \Func{h_{n}}{0} = 0 \EqEndPeriod &
+		\end{flalign*}
+		
+		于是得到了，满足 $\Func{F}{X} = 0$ 的有理系数多项式函数 $F$ \TextComma 从而 $\InSetA{X}$ \TextPeriod
+	\end{proof}
+	
+	
+	\section{总结}
+	本文用了初等的构造的方式证明了原命题 \TextComma 按照此方式得到的整系数多项式函数 $F$ 的次数为
+	\begin{equation*}
+	n \cdot \NormalProdOfN{i}{n}{n} \EqEndPeriod
+	\end{equation*}
+	若 $X$ 为 $N$ 次代数数 \TextBracket{$\InSetN{N}$} \TextComma 则必有 $N \leq n \cdot \NormalProdOfN{i}{n}{n}$ \TextPeriod
+	
+	所有代数数构成一个数域 \TextComma 即代数数域 \TextComma 记作 $\MathSetA$ \TextPeriod 代数数域是复数域 $\MathSetC$ 的一个子集 \TextPeriod
+	
+	
+	\section{一些结论}
+	\BmEnumerate{1} 多项式定理 \TextColon
+	\begin{align*}
+	& \Bracket{\NormalSumOfU{i}{m}{x}}^{n} = \SumPsiHat{r}{m}{q}{n} \Bracket{n! \cdot \Bracket{\ProdOfU{s}{m} q_{s}!}^{-1} \cdot \ProdOfU{r}{m} x_{r}^{q_{r}}} = \SumOfU{k}{n} \SumPsiHatAst{r}{k}{q}{n} \SumPsiVecAst{r}{k}{p}{m} \Bracket{n! \cdot \Bracket{\ProdOfU{s}{k} q_{s}!}^{-1} \cdot \ProdOfU{r}{k} x_{p_{r}}^{q_{r}}} \DomainComma & \\
+	& \InSetN{m} \DomainAnd \InSetN{n} \DomainAnd \SeqOfUInSetC{i}{m}{x} \EqEndPeriod &
+	\end{align*}
+	
+	\BmEnumerate{2} 多项式定理特殊情形及排列组合 \TextColon
+	\begin{flalign*}
+	\FlushSpace & \MathEnumerate{2.1} m^{n} = n! \cdot \SumPsiHat{r}{m}{q}{n} \Bracket{\ProdOfU{r}{m} q_{r}!}^{-1} = n! \cdot \SumOfU{k}{n} \Bracket{\binom{m}{k} \cdot \SumPsiHatAst{r}{k}{q}{n} \Bracket{\ProdOfU{r}{k} q_{r}!}^{-1}} \Domain{\InSetU{m} \DomainAnd \InSetU{n}} \EqEndSemicolon & \\
+	& \MathEnumerate{2.2} m^{n} = \SumOfU{k}{n} \Bracket{\binom{m}{k} \cdot \SumPsiHatAst{r}{k}{q}{n} \Bracket{\ProdOfU{r}{k} \binom{n- \SumOfU{s}{r-1} q_{s}}{q_{r}}}} \Domain{\InSetU{m} \DomainAnd \InSetU{n}} \EqEndSemicolon & \\
+	& \MathEnumerate{2.3} \binom{\NormalSumOfU{r}{m}{p}}{n} = \SumPsiHat{r}{m}{q}{n} \Bracket{\ProdOfU{r}{m} \binom{p_{r}}{q_{r}}} \Domain{\InSetN{m} \DomainAnd \InSetN{n} \DomainAnd \SeqOfUInSetN{r}{m}{p}} \EqEndSemicolon & \\
+	& \MathEnumerate{2.4} \binom{n}{k} \cdot \Bracket{m+1}^{k} = \SumOfN{i}{k} \Bracket{\binom{n}{k-i} \cdot \binom{n-k+i}{i} \cdot m^{k-i}} \Domain{\InSetN{n} \DomainAnd \InPartialSetN{k}{n} \DomainAnd \InSetC{m}} \EqEndPeriod &
+	\end{flalign*}
+	
+	\BmEnumerate{3} 承接 \TextStrip{\nameref{sec:3.5}} 证明部分 \TextColon
+	\begin{flalign*}
+	& \SumPsiVecAst{r}{k}{p}{m} \Bracket{\ProdOfU{r}{k} \Bracket{\SumOfN{i}{n} \Bracket{a_{i} x_{p_{r}}^{i}}}} & \\
+	\FlushSpace \ProgressEq \SumPsiHatN{w}{n}{v}{k}{n+1} \Bracket{\binom{m-k+v_{0}}{v_{0}} \cdot \ProdOfN{w}{n} a_{w}^{v_{w}} \cdot \BoldOmega{m}{\PowerBracket{0}{m-k+v_{0}} \SeqComma \SeqOfU{i}{n} \PowerBracket{i}{v_{i}}}} & \\
+	\ProgressEq \SumOfN{s}{k} \SumPsiHat{w}{n}{v}{k-s} \Bracket{\binom{m-k+s}{s} \cdot a_{0}^{s} \cdot \ProdOfU{w}{n} a_{w}^{v_{w}} \cdot \BoldOmega{m}{\PowerBracket{0}{m-k+s} \SeqComma \SeqOfU{i}{n} \PowerBracket{i}{v_{i}}}} & \\
+	\ProgressEq \binom{m}{k} \cdot a_{0}^{k} + \SumOfU{s}{k} \SumOfU{t}{n} \SumPsiHatAst{w}{t}{v}{k-s} \SumPsiVecAst{w}{t}{u}{n} \Bracket{\binom{m-k+s}{s} \cdot a_{0}^{s} \cdot \ProdOfU{w}{t} a_{u_{w}}^{v_{w}} \cdot \BoldOmega{m}{\PowerBracket{0}{m-k+s} \SeqComma \SeqOfU{i}{t} \PowerBracket{i}{v_{i}}}} & \\
+	\ProgressEq \binom{m}{k} \cdot a_{0}^{k} + \SumOfU{s}{k} \Bracket{\binom{m-k+s}{s} \cdot a_{0}^{s} \cdot \SumOfU{t}{n} \SumPsiHatAst{w}{t}{v}{k-s} \SumPsiVecAst{w}{t}{u}{n} \Bracket{\ProdOfU{w}{t} a_{u_{w}}^{v_{w}} \cdot \BoldOmega{m}{\PowerBracket{0}{m-k+s} \SeqComma \SeqOfU{i}{t} \PowerBracket{i}{v_{i}}}}} \DomainComma & \\
+	& \InSetU{m} \DomainAnd \InSetU{n} \DomainAnd \InPartialSetU{k}{m} \DomainAnd \SeqOfNInSetC{i}{n}{a} \DomainAnd \NeqZero{a_{n}} \DomainAnd \SeqOfUInSetC{i}{n}{x} \EqEndPeriod &
+	\end{flalign*}
+	
+	
+\end{document}
